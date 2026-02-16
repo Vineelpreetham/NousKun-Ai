@@ -78,9 +78,9 @@ export default function WhatsAppForm() {
                         <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mb-4">
                             <CheckCircle2 size={32} />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">Request Sent!</h3>
+                        <h3 className="text-2xl font-bold text-white mb-2">Request Received!</h3>
                         <p className="text-zinc-400">
-                            We've received your details. Check your WhatsApp for a confirmation message.
+                            We've received your details and will be in touch shortly.
                         </p>
                         <button
                             onClick={() => setIsSuccess(false)}
@@ -97,8 +97,8 @@ export default function WhatsAppForm() {
                     <MessageCircle size={20} />
                 </div>
                 <div>
-                    <h3 className="text-xl font-bold text-white">Direct Connect</h3>
-                    <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider">Start the conversation</p>
+                    <h3 className="text-xl font-bold text-white">Get Early Access</h3>
+                    <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider">Join the revolution</p>
                 </div>
             </div>
 
@@ -171,14 +171,14 @@ export default function WhatsAppForm() {
                         <Loader2 className="animate-spin" size={20} />
                     ) : (
                         <>
-                            <span>INITIATE CHAT</span>
+                            <span>REQUEST ACCESS</span>
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </>
                     )}
                 </button>
 
                 <p className="text-[10px] text-zinc-600 text-center leading-relaxed">
-                    By initiating, you agree to receive a response on WhatsApp. <br />
+                    By submitting, you agree to be contacted via WhatsApp. <br />
                     We build systems, not spam.
                 </p>
             </form>

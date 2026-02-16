@@ -108,8 +108,11 @@ export default function Footer() {
             </div>
 
             <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono tracking-widest text-zinc-600 uppercase">
-                <div>
-                    © 2026 NOUSKŪN AI. ALL SYSTEMS NOMINAL.
+                <div className="flex gap-6">
+                    <span>© 2026 NOUSKŪN AI. ALL SYSTEMS NOMINAL.</span>
+                    <Link href="/terms" className="hover:text-ai-blue transition-colors">
+                        Terms & Conditions
+                    </Link>
                 </div>
                 <div>
                     DESIGNED BY ANTIGRAVITY.

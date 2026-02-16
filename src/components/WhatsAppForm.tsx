@@ -44,7 +44,13 @@ export default function WhatsAppForm() {
                 body: JSON.stringify(data),
             });
 
-            const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+            } catch (jsonError) {
+                console.error('Failed to parse JSON response:', jsonError);
+                throw new Error(`Server Error: ${response.status} ${response.statusText}. Check Vercel logs.`);
+            }
 
             if (!response.ok) {
                 throw new Error(result.error || 'Failed to submit form');
@@ -171,7 +177,7 @@ export default function WhatsAppForm() {
                         <Loader2 className="animate-spin" size={20} />
                     ) : (
                         <>
-                            <span>REQUEST ACCESS</span>
+                            <span>SUBMIT</span>
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </>
                     )}

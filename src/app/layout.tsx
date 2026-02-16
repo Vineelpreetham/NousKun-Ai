@@ -1,0 +1,58 @@
+import type { Metadata, Viewport } from 'next';
+import { JetBrains_Mono } from 'next/font/google';
+import './globals.css';
+import Navigation from '@/components/Navigation';
+import MobileNav from '@/components/MobileNav';
+import GrainOverlay from '@/components/ui/GrainOverlay';
+import SmoothScroll from '@/components/SmoothScroll';
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+export const metadata: Metadata = {
+  title: 'NousKun Ai | Intelligence Established',
+  description: 'Immersive AI experiences, automation, and digital growth.',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#050505',
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className={`dark ${jetbrainsMono.variable}`}>
+      <head>
+        <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet" />
+        {/* Fallback for Clash Display if CDN fails or while loading */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          :root { --font-sans: 'Clash Display', sans-serif; }
+        `}} />
+      </head>
+      <body
+        className={`font-sans antialiased bg-ai-black text-foreground selection:bg-ai-blue selection:text-white`}
+      >
+        <GrainOverlay />
+        <Navigation />
+        {/* <MobileNav /> */}
+        <SmoothScroll>
+          <main className="min-h-screen flex flex-col overflow-x-hidden w-full max-w-[100vw]">
+            {children}
+          </main>
+        </SmoothScroll>
+      </body>
+    </html>
+  );
+}

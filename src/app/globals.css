@@ -85,6 +85,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  word-spacing: 0.05em;
+  /* Global slight word spacing */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  word-spacing: 0.1em;
+  /* Header word spacing */
 }
 
 /* Utilities */

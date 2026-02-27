@@ -102,7 +102,7 @@ export function PricingModule({
                                             className={cn(
                                                 "w-full mb-3 md:mb-6 py-4 md:py-6 rounded-2xl font-bold tracking-wide transition-all text-xs md:text-base",
                                                 plan.recommended
-                                                    ? "bg-ai-blue hover:bg-ai-blue-dim text-white border-none"
+                                                    ? "bg-ai-blue hover:bg-ai-blue-dim text-white border-none shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
                                                     : "bg-transparent border-white/20 text-white hover:bg-white/5 hover:border-white/40"
                                             )}
                                         >

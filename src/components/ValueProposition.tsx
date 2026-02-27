@@ -41,8 +41,9 @@ export default function ValueProposition() {
                 </div>
 
                 {/* Main Heading */}
-                <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1] text-white mb-8">
-                    Turn Your Website Into an <span className="text-ai-blue">Intelligent Revenue System.</span>
+                <h2 className="text-4xl md:text-6xl lg:text-[5.5rem] font-bold tracking-normal leading-[1.15] text-white mb-8 w-full md:[word-spacing:0.15em]">
+                    Turn Your Website Into <br className="hidden md:block" />
+                    an <span className="text-ai-blue">Intelligent Revenue System.</span>
                 </h2>
 
                 {/* Subtext */}

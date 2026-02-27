@@ -1,0 +1,590 @@
+
+> nouskun-ai@0.1.0 dev
+> next dev -H 0.0.0.0
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/vineelpreetham/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/vineelpreetham/Documents/nouskun-ai/package-lock.json
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://0.0.0.0:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 1014ms
+ GET / 200 in 1059ms (compile: 526ms, render: 533ms)
+ GET / 200 in 1151ms (compile: 642ms, render: 510ms)
+ GET / 200 in 628ms (compile: 494ms, render: 134ms)
+✓ Compiled in 2.3s
+✓ Compiled in 234ms
+ GET / 200 in 368ms (compile: 91ms, render: 277ms)
+✓ Compiled in 328ms
+CHAT STATE KEYS: [
+  'id',
+  'messages',
+  'setMessages',
+  'sendMessage',
+  'regenerate',
+  'clearError',
+  'stop',
+  'error',
+  'resumeStream',
+  'status',
+  'addToolResult',
+  'addToolOutput',
+  'addToolApprovalResponse'
+]
+ GET / 200 in 341ms (compile: 107ms, render: 234ms)
+CHAT STATE KEYS: [
+  'id',
+  'messages',
+  'setMessages',
+  'sendMessage',
+  'regenerate',
+  'clearError',
+  'stop',
+  'error',
+  'resumeStream',
+  'status',
+  'addToolResult',
+  'addToolOutput',
+  'addToolApprovalResponse'
+]
+ GET / 200 in 156ms (compile: 58ms, render: 98ms)
+✓ Compiled in 222ms
+✓ Compiled in 223ms
+CHAT STATE KEYS: [
+  'id',
+  'messages',
+  'setMessages',
+  'sendMessage',
+  'regenerate',
+  'clearError',
+  'stop',
+  'error',
+  'resumeStream',
+  'status',
+  'addToolResult',
+  'addToolOutput',
+  'addToolApprovalResponse'
+]
+ POST /api/chat 404 in 1161ms (compile: 962ms, render: 199ms)
+✓ Compiled in 582ms
+✓ Compiled in 89ms
+✓ Compiled in 133ms
+✓ Compiled in 111ms
+CHAT STATE KEYS: [
+  'id',
+  'messages',
+  'setMessages',
+  'sendMessage',
+  'regenerate',
+  'clearError',
+  'stop',
+  'error',
+  'resumeStream',
+  'status',
+  'addToolResult',
+  'addToolOutput',
+  'addToolApprovalResponse'
+]
+ GET / 200 in 377ms (compile: 136ms, render: 240ms)
+--> API Strategist hit
+   --> Extracted messages: [
+  { role: 'assistant', content: undefined },
+  { role: 'user', content: 'hi' }
+]
+   --> Stream generated, returning response
+Error [AI_InvalidPromptError]: Invalid prompt: The messages do not match the ModelMessage[] schema.
+    at ignore-listed frames {
+  prompt: [Object],
+  [cause]: Error [AI_TypeValidationError]: Type validation failed: Value: [{"role":"assistant"},{"role":"user","content":"hi"}].
+  Error message: [
+    {
+      "code": "invalid_union",
+      "errors": [
+        [
+          {
+            "code": "invalid_value",
+            "values": [
+              "system"
+            ],
+            "path": [
+              "role"
+            ],
+            "message": "Invalid input: expected \"system\""
+          },
+          {
+            "expected": "string",
+            "code": "invalid_type",
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input: expected string, received undefined"
+          }
+        ],
+        [
+          {
+            "code": "invalid_value",
+            "values": [
+              "user"
+            ],
+            "path": [
+              "role"
+            ],
+            "message": "Invalid input: expected \"user\""
+          },
+          {
+            "code": "invalid_union",
+            "errors": [
+              [
+                {
+                  "expected": "string",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected string, received undefined"
+                }
+              ],
+              [
+                {
+                  "expected": "array",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected array, received undefined"
+                }
+              ]
+            ],
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input"
+          }
+        ],
+        [
+          {
+            "code": "invalid_union",
+            "errors": [
+              [
+                {
+                  "expected": "string",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected string, received undefined"
+                }
+              ],
+              [
+                {
+                  "expected": "array",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected array, received undefined"
+                }
+              ]
+            ],
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input"
+          }
+        ],
+        [
+          {
+            "code": "invalid_value",
+            "values": [
+              "tool"
+            ],
+            "path": [
+              "role"
+            ],
+            "message": "Invalid input: expected \"tool\""
+          },
+          {
+            "expected": "array",
+            "code": "invalid_type",
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input: expected array, received undefined"
+          }
+        ]
+      ],
+      "path": [
+        0
+      ],
+      "message": "Invalid input"
+    }
+  ]
+      at ignore-listed frames {
+    value: [ [Object], [Object] ],
+    context: undefined,
+    [cause]: Error [ZodError]: [
+      {
+        "code": "invalid_union",
+        "errors": [
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                "system"
+              ],
+              "path": [
+                "role"
+              ],
+              "message": "Invalid input: expected \"system\""
+            },
+            {
+              "expected": "string",
+              "code": "invalid_type",
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input: expected string, received undefined"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                "user"
+              ],
+              "path": [
+                "role"
+              ],
+              "message": "Invalid input: expected \"user\""
+            },
+            {
+              "code": "invalid_union",
+              "errors": [
+                [
+                  {
+                    "expected": "string",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected string, received undefined"
+                  }
+                ],
+                [
+                  {
+                    "expected": "array",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected array, received undefined"
+                  }
+                ]
+              ],
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input"
+            }
+          ],
+          [
+            {
+              "code": "invalid_union",
+              "errors": [
+                [
+                  {
+                    "expected": "string",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected string, received undefined"
+                  }
+                ],
+                [
+                  {
+                    "expected": "array",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected array, received undefined"
+                  }
+                ]
+              ],
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                "tool"
+              ],
+              "path": [
+                "role"
+              ],
+              "message": "Invalid input: expected \"tool\""
+            },
+            {
+              "expected": "array",
+              "code": "invalid_type",
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input: expected array, received undefined"
+            }
+          ]
+        ],
+        "path": [
+          0
+        ],
+        "message": "Invalid input"
+      }
+    ]
+        at ignore-listed frames
+  }
+}
+ POST /api/ai-strategist 200 in 389ms (compile: 195ms, render: 194ms)
+--> API Strategist hit
+   --> Extracted messages: [
+  { role: 'assistant', content: undefined },
+  { role: 'user', content: 'hi' },
+  { role: 'user', content: 'my business is a hardware shop' }
+]
+   --> Stream generated, returning response
+Error [AI_InvalidPromptError]: Invalid prompt: The messages do not match the ModelMessage[] schema.
+    at ignore-listed frames {
+  prompt: [Object],
+  [cause]: Error [AI_TypeValidationError]: Type validation failed: Value: [{"role":"assistant"},{"role":"user","content":"hi"},{"role":"user","content":"my business is a hardware shop"}].
+  Error message: [
+    {
+      "code": "invalid_union",
+      "errors": [
+        [
+          {
+            "code": "invalid_value",
+            "values": [
+              "system"
+            ],
+            "path": [
+              "role"
+            ],
+            "message": "Invalid input: expected \"system\""
+          },
+          {
+            "expected": "string",
+            "code": "invalid_type",
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input: expected string, received undefined"
+          }
+        ],
+        [
+          {
+            "code": "invalid_value",
+            "values": [
+              "user"
+            ],
+            "path": [
+              "role"
+            ],
+            "message": "Invalid input: expected \"user\""
+          },
+          {
+            "code": "invalid_union",
+            "errors": [
+              [
+                {
+                  "expected": "string",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected string, received undefined"
+                }
+              ],
+              [
+                {
+                  "expected": "array",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected array, received undefined"
+                }
+              ]
+            ],
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input"
+          }
+        ],
+        [
+          {
+            "code": "invalid_union",
+            "errors": [
+              [
+                {
+                  "expected": "string",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected string, received undefined"
+                }
+              ],
+              [
+                {
+                  "expected": "array",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected array, received undefined"
+                }
+              ]
+            ],
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input"
+          }
+        ],
+        [
+          {
+            "code": "invalid_value",
+            "values": [
+              "tool"
+            ],
+            "path": [
+              "role"
+            ],
+            "message": "Invalid input: expected \"tool\""
+          },
+          {
+            "expected": "array",
+            "code": "invalid_type",
+            "path": [
+              "content"
+            ],
+            "message": "Invalid input: expected array, received undefined"
+          }
+        ]
+      ],
+      "path": [
+        0
+      ],
+      "message": "Invalid input"
+    }
+  ]
+      at ignore-listed frames {
+    value: [ [Object], [Object], [Object] ],
+    context: undefined,
+    [cause]: Error [ZodError]: [
+      {
+        "code": "invalid_union",
+        "errors": [
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                "system"
+              ],
+              "path": [
+                "role"
+              ],
+              "message": "Invalid input: expected \"system\""
+            },
+            {
+              "expected": "string",
+              "code": "invalid_type",
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input: expected string, received undefined"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                "user"
+              ],
+              "path": [
+                "role"
+              ],
+              "message": "Invalid input: expected \"user\""
+            },
+            {
+              "code": "invalid_union",
+              "errors": [
+                [
+                  {
+                    "expected": "string",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected string, received undefined"
+                  }
+                ],
+                [
+                  {
+                    "expected": "array",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected array, received undefined"
+                  }
+                ]
+              ],
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input"
+            }
+          ],
+          [
+            {
+              "code": "invalid_union",
+              "errors": [
+                [
+                  {
+                    "expected": "string",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected string, received undefined"
+                  }
+                ],
+                [
+                  {
+                    "expected": "array",
+                    "code": "invalid_type",
+                    "path": [],
+                    "message": "Invalid input: expected array, received undefined"
+                  }
+                ]
+              ],
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input"
+            }
+          ],
+          [
+            {
+              "code": "invalid_value",
+              "values": [
+                "tool"
+              ],
+              "path": [
+                "role"
+              ],
+              "message": "Invalid input: expected \"tool\""
+            },
+            {
+              "expected": "array",
+              "code": "invalid_type",
+              "path": [
+                "content"
+              ],
+              "message": "Invalid input: expected array, received undefined"
+            }
+          ]
+        ],
+        "path": [
+          0
+        ],
+        "message": "Invalid input"
+      }
+    ]
+        at ignore-listed frames
+  }
+}
+ POST /api/ai-strategist 200 in 152ms (compile: 5ms, render: 147ms)

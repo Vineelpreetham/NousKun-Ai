@@ -101,7 +101,7 @@ export default function Navigation() {
                 <div className="hidden md:block">
                     <button
                         onClick={scrollToContact}
-                        className="px-6 py-2 rounded-none border border-ai-blue/50 text-ai-blue text-xs font-mono tracking-widest hover:bg-ai-blue hover:text-white transition-all duration-300"
+                        className="px-6 py-2 rounded-sm border border-ai-blue/50 text-ai-blue text-xs font-mono tracking-widest hover:bg-ai-blue hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
                     >
                         INITIATE
                     </button>
@@ -159,7 +159,7 @@ export default function Navigation() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5 }}
                             onClick={scrollToContact}
-                            className="px-8 py-3 border border-ai-blue text-ai-blue tracking-widest uppercase font-mono text-sm hover:bg-ai-blue hover:text-white transition-all"
+                            className="px-8 py-3 rounded-sm border border-ai-blue text-ai-blue tracking-widest uppercase font-mono text-sm hover:bg-ai-blue hover:text-white transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
                         >
                             INITIATE SYSTEM
                         </motion.button>

@@ -171,7 +171,7 @@ export default function WhatsAppForm() {
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-6 bg-ai-blue hover:bg-ai-blue-dim text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed group"
+                    className="w-full mt-6 bg-ai-blue hover:bg-ai-blue-dim text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed group shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
                 >
                     {isSubmitting ? (
                         <Loader2 className="animate-spin" size={20} />

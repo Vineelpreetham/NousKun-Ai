@@ -21,10 +21,10 @@ export default function Footer() {
                     {[...Array(4)].map((_, i) => (
                         <motion.path
                             key={i}
-                            d={`M0,${50 + i * 5} Q25,${40 + i * 5} 50,${50 + i * 5} T100,${50 + i * 5}`}
+                            d={`M0,${50 + i * 5} C30,${40 + i * 5} 70,${40 + i * 5} 100,${50 + i * 5}`}
                             fill="none"
                             stroke={i % 2 === 0 ? "#007AFF" : "#00FFFF"}
-                            strokeWidth={0.5 + Math.random() * 0.5}
+                            strokeWidth={0.5 + (i * 0.15)}
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{
                                 pathLength: [0, 1, 1],

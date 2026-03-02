@@ -103,8 +103,8 @@ export default function WhatsAppForm() {
                     <MessageCircle size={20} />
                 </div>
                 <div>
-                    <h3 className="text-xl font-bold text-white">Get Early Access</h3>
-                    <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider">Join the revolution</p>
+                    <h3 className="text-xl font-bold text-white">Book a Free Consultation</h3>
+                    <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider">Connect Your Systems</p>
                 </div>
             </div>
 
@@ -177,7 +177,7 @@ export default function WhatsAppForm() {
                         <Loader2 className="animate-spin" size={20} />
                     ) : (
                         <>
-                            <span>SUBMIT</span>
+                            <span>BOOK NOW</span>
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </>
                     )}

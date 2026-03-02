@@ -73,50 +73,50 @@ const webPlans: PricingPlan[] = [
 const aiPlans: PricingPlan[] = [
     {
         id: 'ai-starter',
-        name: 'Starter',
-        description: 'Basic lead capture automation + email workflows.',
+        name: 'Starter Agent',
+        description: 'Basic autonomous lead capture + email and simple chat workflows.',
         icon: <Bot className="w-8 h-8" />,
-        priceMonthly: 22000,
-        priceYearly: 22000 * 10,
+        priceMonthly: 29000,
+        priceYearly: 29000 * 10,
         users: 'Entry-level automation',
         features: [
-            { label: 'Lead Capture System', included: true },
-            { label: 'Basic Email Sequences', included: true },
-            { label: 'Standard Chatbot', included: true },
-            { label: 'Simple Zapier Workflows', included: false },
-            { label: 'WhatsApp API Integration', included: false },
+            { label: 'Basic AI Chatbot (GPT-4o mini)', included: true },
+            { label: 'Lead Capture & Sync (Simple)', included: true },
+            { label: 'Automated Email Sequences', included: true },
+            { label: 'Standard Zapier Hooks', included: false },
+            { label: 'Voice AI Integration', included: false },
         ]
     },
     {
         id: 'ai-growth',
-        name: 'Growth',
-        description: 'Lead qualification + WhatsApp automation + CRM integration.',
+        name: 'Autopilot Growth',
+        description: 'Advanced conversational agents + WhatsApp automation + CRM routing.',
         icon: <Workflow className="w-8 h-8" />,
-        priceMonthly: 48000,
-        priceYearly: 48000 * 10,
+        priceMonthly: 59000,
+        priceYearly: 59000 * 10,
         users: 'Business process automation',
         features: [
-            { label: 'WhatsApp Business API', included: true },
-            { label: 'Custom AI Chatbot (GPT-4)', included: true },
-            { label: 'Multi-step Zapier/Make Automations', included: true },
-            { label: 'Lead Qualification Logic', included: true },
-            { label: 'CRM Integration', included: true },
+            { label: 'Custom Trained AI Chatbot (GPT-4o)', included: true },
+            { label: 'WhatsApp Business API Autonomy', included: true },
+            { label: 'Multi-step Agent Workflows (Make/n8n)', included: true },
+            { label: 'Intelligent Lead Qualification logic', included: true },
+            { label: 'Two-way CRM Integration', included: true },
         ],
         recommended: true,
     },
     {
         id: 'ai-scale',
-        name: 'Scale',
-        description: 'Full AI automation stack (chatbot + advanced workflows + multi-channel automation).',
+        name: 'Enterprise Matrix',
+        description: 'Full custom AI ecosystem (autonomous agents + internal knowledge bases).',
         icon: <BrainCircuit className="w-8 h-8" />,
-        priceMonthly: 95000,
-        priceYearly: 95000 * 10,
-        users: 'Enterprise automation',
+        priceMonthly: 120000,
+        priceYearly: 120000 * 10,
+        users: 'Enterprise autonomy',
         features: [
-            { label: 'Custom LLM Training/Fine-tuning', included: true },
-            { label: 'Autonomous Agents', included: true },
-            { label: 'Complex Data Pipelines', included: true },
-            { label: 'Enterprise Security', included: true },
+            { label: 'Custom RAG / Internal Knowledge Base', included: true },
+            { label: 'Multi-Agent Autonomous Systems', included: true },
+            { label: 'Voice AI Phone Agents', included: true },
+            { label: 'Complex Data Pipelines & Security', included: true },
             { label: 'Dedicated AI Engineer', included: true },
         ]
     }
@@ -177,11 +177,11 @@ const growthPlans: PricingPlan[] = [
 type Category = 'web' | 'ai' | 'growth';
 
 export default function Pricing() {
-    const [activeCategory, setActiveCategory] = useState<Category>('web');
+    const [activeCategory, setActiveCategory] = useState<Category>('ai');
 
     const categories: { id: Category; label: string }[] = [
-        { id: 'web', label: 'Intelligent Web Systems' },
         { id: 'ai', label: 'AI & Automation' },
+        { id: 'web', label: 'Intelligent Web Systems' },
         { id: 'growth', label: 'Growth Intelligence' },
     ];
 

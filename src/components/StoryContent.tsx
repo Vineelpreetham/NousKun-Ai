@@ -32,10 +32,10 @@ export default function StoryContent() {
                     className="space-y-6 text-lg text-zinc-400 leading-relaxed"
                 >
                     <p>
-                        For too long, businesses have treated websites as digital brochures—passive, static, and waiting for visitors to take action.
+                        For too long, businesses have relied on fragile, manual processes and digital brochures that passively wait for visitors to take action.
                     </p>
                     <p>
-                        At NousKūn AI, we saw a different reality. We saw the potential for digital assets to be active participants in the business. To not just sit there, but to work.
+                        At NousKūn AI, we saw a different reality. We saw the potential for AI agents and automated workflows to take over operations, serving as active participants in your business.
                     </p>
                 </motion.div>
 
@@ -47,10 +47,10 @@ export default function StoryContent() {
                     className="space-y-6 text-lg text-zinc-400 leading-relaxed"
                 >
                     <p>
-                        Our mission is to bridge the gap between human creativity and machine efficiency. We build systems that handle the repetitive, the data-heavy, and the operational—freeing humans to focus on strategy and connection.
+                        Our mission is to bridge the gap between human strategy and machine execution. We build systems that handle the repetitive, the data-heavy, and the operational—freeing you to focus on growth and connection.
                     </p>
                     <p className="text-white font-bold">
-                        We don't just build websites. We engineer the intelligence that powers them.
+                        We don't just build websites. We are an AI Service Provider engineering the intelligence that powers entire organizations.
                     </p>
                 </motion.div>
             </div>

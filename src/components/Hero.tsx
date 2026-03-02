@@ -81,7 +81,7 @@ export default function Hero() {
                     </span>
                 </h1>
                 <p className="mt-6 text-sm uppercase tracking-[0.2em] text-zinc-400 opacity-0 hero-subtitle">
-                    Intelligence Established
+                    Engineering Autonomous AI Systems
                 </p>
             </div>
 

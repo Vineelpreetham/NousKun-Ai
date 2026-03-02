@@ -6,19 +6,6 @@ import { Monitor, Cpu, TrendingUp, ChevronRight, ArrowLeft } from 'lucide-react'
 
 const serviceCategories = [
     {
-        icon: Monitor,
-        title: 'Intelligent Web Systems',
-        description: 'More than a website. A digital headquarters designed to convert.',
-        actionWord: 'Architecture',
-        features: [
-            'Next.js & React Architecture',
-            'High-Performance Animation (GSAP/Framer)',
-            'Conversion-Focused UX/UI',
-            'Mobile-First Responsive Design',
-            'CMS Integration (Sanity/Strapi)'
-        ]
-    },
-    {
         icon: Cpu,
         title: 'AI & Automation',
         description: 'Replace manual tasks with intelligent workflows that never sleep.',
@@ -29,6 +16,19 @@ const serviceCategories = [
             'WhatsApp Business API Integration',
             'Custom AI Chatbots',
             'Zapier/Make.com Workflow Design'
+        ]
+    },
+    {
+        icon: Monitor,
+        title: 'Intelligent Web Systems',
+        description: 'More than a website. A digital headquarters designed to convert.',
+        actionWord: 'Architecture',
+        features: [
+            'Next.js & React Architecture',
+            'High-Performance Animation (GSAP/Framer)',
+            'Conversion-Focused UX/UI',
+            'Mobile-First Responsive Design',
+            'CMS Integration (Sanity/Strapi)'
         ]
     },
     {

@@ -42,19 +42,19 @@ export default function ValueProposition() {
 
                 {/* Main Heading */}
                 <h2 className="text-4xl md:text-6xl lg:text-[5.5rem] font-bold tracking-normal leading-[1.15] text-white mb-8 w-full">
-                    Turn Your Website Into <br className="hidden md:block" />
-                    an <span className="text-ai-blue">Intelligent Revenue System.</span>
+                    Deploy AI to Automate, <br className="hidden md:block" />
+                    Scale, and <span className="text-ai-blue">Dominate.</span>
                 </h2>
 
                 {/* Subtext */}
                 <p className="text-lg md:text-xl text-zinc-400 max-w-3xl leading-relaxed mb-10">
-                    We design AI-powered digital systems that attract, qualify, convert, and manage customers automatically — without manual follow-ups.
+                    We build AI agents, automate complex workflows, and integrate intelligent web systems to replace repetitive tasks with relentless efficiency.
                 </p>
 
                 {/* Additional Supporting Line */}
                 <p className="text-sm md:text-base text-zinc-500 font-mono tracking-wide uppercase mb-12">
-                    Not just websites. Not just automation. <br className="hidden md:block" />
-                    End-to-end intelligence for modern businesses.
+                    Not just websites. Not just software. <br className="hidden md:block" />
+                    Autonomous infrastructure for the modern enterprise.
                 </p>
 
                 {/* CTAs */}

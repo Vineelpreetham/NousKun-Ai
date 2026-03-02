@@ -83,7 +83,10 @@ export default function AiStrategistWidget() {
                         </div>
 
                         {/* Chat Area */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-ai-black/50 custom-scrollbar">
+                        <div
+                            className="flex-1 overflow-y-auto overscroll-contain p-4 space-y-4 bg-ai-black/50 custom-scrollbar"
+                            data-lenis-prevent
+                        >
                             {messages.map((m: any) => {
                                 const textContent = getMessageText(m);
                                 return (
@@ -108,9 +111,9 @@ export default function AiStrategistWidget() {
                                                 {/* Detect if CTA is likely present to show button */}
                                                 {m.role === 'assistant' && textContent.toLowerCase().includes('book') && textContent.toLowerCase().includes('call') && (
                                                     <div className="mt-4 pt-3 border-t border-white/10">
-                                                        <Link href="/contact" onClick={() => setIsOpen(false)} className="inline-block w-full text-center py-2 px-4 bg-white text-black font-semibold rounded-md text-xs hover:bg-zinc-200 transition-colors">
+                                                        <a href="#contact" onClick={() => setIsOpen(false)} className="inline-block w-full text-center py-2 px-4 bg-white text-black font-semibold rounded-md text-xs hover:bg-zinc-200 transition-colors">
                                                             Book Strategy Call
-                                                        </Link>
+                                                        </a>
                                                     </div>
                                                 )}
                                             </div>

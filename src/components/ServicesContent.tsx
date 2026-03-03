@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Monitor, Cpu, TrendingUp, ChevronRight, ArrowLeft } from 'lucide-react';
+import { Monitor, Cpu, Database, ChevronRight, ArrowLeft } from 'lucide-react';
 
 const serviceCategories = [
     {
@@ -20,28 +20,28 @@ const serviceCategories = [
     },
     {
         icon: Monitor,
-        title: 'Intelligent Web Systems',
-        description: 'More than a website. A digital headquarters designed to convert.',
+        title: 'Intelligent Web & Growth Systems',
+        description: 'More than a website. A digital headquarters designed to convert and grow.',
         actionWord: 'Architecture',
         features: [
             'Next.js & React Architecture',
-            'High-Performance Animation (GSAP/Framer)',
-            'Conversion-Focused UX/UI',
-            'Mobile-First Responsive Design',
+            'Conversion-Focused AI UI/UX',
+            'Technical SEO & Growth Tracking',
+            'Funnel Analytics Integration',
             'CMS Integration (Sanity/Strapi)'
         ]
     },
     {
-        icon: TrendingUp,
-        title: 'Growth Intelligence',
-        description: 'Data-driven strategies to feed the system with high-quality traffic.',
-        actionWord: 'Expansion',
+        icon: Database,
+        title: 'SaaS using AI',
+        description: 'Bespoke AI-powered software platforms designed for scalable revenue.',
+        actionWord: 'Software',
         features: [
-            'Technical SEO Optimization',
-            'Funnel Analytics & Tracking',
-            'Content Strategy for AI Search',
-            'Performance Marketing Assets',
-            'User Behavior Analysis'
+            'Custom AI LLM Pipelines',
+            'Tiered Subscription Systems',
+            'Scalable Cloud Infrastructure',
+            'User & Admin Dashboards',
+            'API Development & Integration'
         ]
     }
 ];

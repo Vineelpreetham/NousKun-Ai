@@ -17,7 +17,7 @@ export default function AiStrategistWidget() {
             {
                 id: '1',
                 role: 'assistant',
-                parts: [{ type: 'text', text: "Tell me about your business. What industry are you in, and what's your biggest growth challenge right now?" }],
+                parts: [{ type: 'text', text: "Tell me about your business. What industry are you in, and what's your biggest operational challenge right now?" }],
             }
         ],
     });
@@ -67,7 +67,7 @@ export default function AiStrategistWidget() {
                                     <Bot size={18} className="text-ai-blue" />
                                 </div>
                                 <div>
-                                    <h3 className="text-sm font-semibold text-white">Nouskun Growth Strategist</h3>
+                                    <h3 className="text-sm font-semibold text-white">Nouskun AI Strategist</h3>
                                     <div className="flex items-center gap-1.5">
                                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                                         <span className="text-xs text-zinc-400">Online</span>

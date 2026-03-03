@@ -4,13 +4,13 @@ import Accordion from './Accordion';
 
 const services = [
     {
-        title: 'Intelligent Website Systems',
-        description: 'Websites that think, not just exist. We design conversion-focused, AI-ready websites that act as the central brain of your business.',
+        title: 'Intelligent Web & Growth Systems',
+        description: 'Websites that think, not just exist. We design conversion-focused, AI-ready architecture that acts as the central brain of your business.',
         features: [
             'High-performance, futuristic UI/UX',
-            'AI-ready forms and flows',
-            'Conversion-first architecture',
-            'Fully responsive across all devices',
+            'Conversion-first architecture & funnels',
+            'Technical SEO & search visibility',
+            'Predictive growth analytics',
             'Built to integrate automation'
         ]
     },
@@ -26,14 +26,14 @@ const services = [
         ]
     },
     {
-        title: 'Brand, SEO & Growth Intelligence',
-        description: 'Visibility without guesswork. We help your brand get discovered, trusted, and optimized through data-driven growth systems.',
+        title: 'SaaS using AI',
+        description: 'Turn your specialized knowledge into scalable software. We build bespoke, AI-powered SaaS platforms ready for market acquisition.',
         features: [
-            'Brand positioning and messaging',
-            'SEO and search visibility',
-            'Conversion analytics',
-            'Funnel performance tracking',
-            'Data-driven optimization'
+            'Custom AI LLM Pipelines',
+            'Tiered Subscription Models',
+            'Automated Onboarding Flows',
+            'Scalable Cloud Infrastructure',
+            'Admin & User Dashboards'
         ]
     },
     {

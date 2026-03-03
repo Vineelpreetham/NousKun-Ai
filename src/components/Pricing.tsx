@@ -9,7 +9,7 @@ import {
     Bot,
     Workflow,
     BrainCircuit,
-    TrendingUp,
+    Database,
     BarChart3,
     LineChart
 } from 'lucide-react';
@@ -29,15 +29,15 @@ const webPlans: PricingPlan[] = [
         users: 'Ideal for early-stage startups',
         features: [
             { label: 'Responsive Design', included: true },
-            { label: 'Core UX/UI', included: true },
-            { label: 'Basic Animations', included: true },
+            { label: 'Core UX/UI & Animations', included: true },
             { label: 'CMS Setup', included: true },
             { label: 'Standard SEO Setup', included: true },
+            { label: 'Basic Analytics', included: true },
         ]
     },
     {
         id: 'web-growth',
-        name: 'Growth',
+        name: 'Growth Systems',
         description: 'For serious businesses wanting performance + conversion focus.',
         icon: <Rocket className="w-8 h-8" />,
         priceMonthly: 55000,
@@ -46,26 +46,26 @@ const webPlans: PricingPlan[] = [
         features: [
             { label: 'Advanced UI & Motion Effects', included: true },
             { label: 'Conversion-Focused UX', included: true },
-            { label: 'SEO-Ready Structure', included: true },
-            { label: 'Headless CMS Integration', included: true },
+            { label: 'Technical SEO Optimization', included: true },
+            { label: 'Funnel Analytics & Heatmaps', included: true },
             { label: 'Performance Optimization', included: true },
         ],
         recommended: true,
     },
     {
         id: 'web-scale',
-        name: 'Scale',
-        description: 'Full premium system. Custom architecture, high-performance animations, advanced integrations.',
+        name: 'Scale Infrastructure',
+        description: 'Full custom architecture, growth analytics, and advanced integrations.',
         icon: <Gem className="w-8 h-8" />,
         priceMonthly: 110000,
         priceYearly: 110000 * 10,
         users: 'For market leaders',
         features: [
-            { label: 'Custom Web Application', included: true },
+            { label: 'Custom Web Architecture', included: true },
+            { label: 'Predictive Growth Analytics', included: true },
             { label: 'Complex Backend Integration', included: true },
-            { label: 'Global CDN & Optimization', included: true },
             { label: 'Dedicated Design Team', included: true },
-            { label: '24/7 SLAs', included: true },
+            { label: 'Weekly Growth Sprints', included: true },
         ]
     }
 ];
@@ -122,74 +122,74 @@ const aiPlans: PricingPlan[] = [
     }
 ];
 
-const growthPlans: PricingPlan[] = [
+const saasPlans: PricingPlan[] = [
     {
-        id: 'growth-starter',
-        name: 'Starter',
-        description: 'Technical SEO + tracking setup.',
-        icon: <TrendingUp className="w-8 h-8" />,
-        priceMonthly: 18000,
-        priceYearly: 18000 * 10,
-        users: 'Basic tracking',
+        id: 'saas-mvp',
+        name: 'AI MVP',
+        description: 'Rapid prototyping of AI-powered SaaS solutions for market validation.',
+        icon: <Database className="w-8 h-8" />,
+        priceMonthly: 75000,
+        priceYearly: 75000 * 10,
+        users: 'For stealth startups',
         features: [
-            { label: 'Google Analytics 4 Setup', included: true },
-            { label: 'Basic SEO Audit', included: true },
-            { label: 'Monthly Performance Report', included: true },
-            { label: 'Competitor Analysis', included: false },
-            { label: 'Conversion Rate Optimization', included: false },
+            { label: 'Core AI Model Integration', included: true },
+            { label: 'Basic User Authentication', included: true },
+            { label: 'Stripe Billing Setup', included: true },
+            { label: 'MVP UI/UX Design', included: true },
+            { label: 'Scalable Cloud Hosting', included: false },
         ]
     },
     {
-        id: 'growth-growth',
-        name: 'Growth',
-        description: 'Funnel tracking + AI-driven content + performance analysis.',
+        id: 'saas-pro',
+        name: 'SaaS Platform',
+        description: 'Fully featured AI software platform ready for user acquisition.',
         icon: <BarChart3 className="w-8 h-8" />,
-        priceMonthly: 38000,
-        priceYearly: 38000 * 10,
-        users: 'Performance marketing',
+        priceMonthly: 150000,
+        priceYearly: 150000 * 10,
+        users: 'For growing platforms',
         features: [
-            { label: 'Technical SEO Optimization', included: true },
-            { label: 'Funnel Analytics & Heatmaps', included: true },
-            { label: 'AI Search Content Strategy', included: true },
-            { label: 'Performance Marketing Assets', included: true },
-            { label: 'Bi-weekly Strategy Calls', included: true },
+            { label: 'Advanced AI Pipelines & RAG', included: true },
+            { label: 'Tiered Subscription Management', included: true },
+            { label: 'Admin & User Dashboards', included: true },
+            { label: 'Custom API Development', included: true },
+            { label: 'Scalable AWS/GCP Infrastructure', included: true },
         ],
         recommended: true,
     },
     {
-        id: 'growth-scale',
-        name: 'Scale',
-        description: 'Complete growth infrastructure + analytics + strategic optimization.',
+        id: 'saas-enterprise',
+        name: 'Enterprise App',
+        description: 'Bespoke AI solutions with high compliance and custom large language models.',
         icon: <LineChart className="w-8 h-8" />,
-        priceMonthly: 75000,
-        priceYearly: 75000 * 10,
-        users: 'Data-driven expansion',
+        priceMonthly: 300000,
+        priceYearly: 300000 * 10,
+        users: 'For specialized tech',
         features: [
-            { label: 'Advanced User Behavior Analysis', included: true },
-            { label: 'Cross-channel Attribution', included: true },
-            { label: 'Predictive Analytics', included: true },
-            { label: 'Custom Dashboard Development', included: true },
-            { label: 'Weekly Growth Sprints', included: true },
+            { label: 'Fine-tuned / Custom LLMs', included: true },
+            { label: 'Enterprise Security & Compliance', included: true },
+            { label: 'Multi-tenant Architecture', included: true },
+            { label: 'Dedicated Infrastructure Management', included: true },
+            { label: '24/7 Priority Support & SLAs', included: true },
         ]
     }
 ];
 
-type Category = 'web' | 'ai' | 'growth';
+type Category = 'web' | 'ai' | 'saas';
 
 export default function Pricing() {
     const [activeCategory, setActiveCategory] = useState<Category>('ai');
 
     const categories: { id: Category; label: string }[] = [
         { id: 'ai', label: 'AI & Automation' },
-        { id: 'web', label: 'Intelligent Web Systems' },
-        { id: 'growth', label: 'Growth Intelligence' },
+        { id: 'web', label: 'Intelligent Web & Growth Systems' },
+        { id: 'saas', label: 'SaaS using AI' },
     ];
 
     const getPlans = () => {
         switch (activeCategory) {
             case 'web': return webPlans;
             case 'ai': return aiPlans;
-            case 'growth': return growthPlans;
+            case 'saas': return saasPlans;
             default: return webPlans;
         }
     };

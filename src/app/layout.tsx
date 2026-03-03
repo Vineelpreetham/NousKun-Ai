@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'NousKun Ai | Intelligence Established',
-  description: 'Immersive AI experiences, automation, and digital growth.',
+  description: 'Immersive AI experiences, automation, and SaaS platforms.',
 };
 
 export const viewport: Viewport = {

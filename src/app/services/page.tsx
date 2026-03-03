@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Services | NousKun Ai',
-    description: 'Intelligent Web Systems, AI Automation, and Growth Intelligence.',
+    description: 'Intelligent Web Systems, AI Automation, and SaaS using AI.',
 };
 
 export default function ServicesPage() {

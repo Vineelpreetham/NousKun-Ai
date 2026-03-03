@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, ArrowRight, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
-import { useState } from 'react';
+import { MessageCircle, ArrowRight, Loader2, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 // Validation Schema
 const formSchema = z.object({
@@ -21,6 +21,15 @@ export default function WhatsAppForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [prefilledInterest, setPrefilledInterest] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Read ?interest= from URL — supports both /?interest=X and /#contact?interest=X
+        const searchParams = new URLSearchParams(window.location.search);
+        const hashParams = new URLSearchParams(window.location.hash.split('?')[1] || '');
+        const interest = searchParams.get('interest') || hashParams.get('interest');
+        if (interest) setPrefilledInterest(decodeURIComponent(interest.replace(/\+/g, ' ')));
+    }, []);
 
     const {
         register,
@@ -76,23 +85,39 @@ export default function WhatsAppForm() {
             <AnimatePresence>
                 {isSuccess && (
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute inset-0 bg-ai-card z-20 flex flex-col items-center justify-center text-center p-8"
+                        initial={{ opacity: 0, scale: 0.97 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.97 }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        className="absolute inset-0 bg-ai-card z-20 flex flex-col items-center justify-center text-center p-8 rounded-2xl"
                     >
-                        <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mb-4">
-                            <CheckCircle2 size={32} />
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">Request Received!</h3>
-                        <p className="text-zinc-400">
-                            We've received your details and will be in touch shortly.
+                        {/* Animated checkmark */}
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
+                            className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-400 mb-5 shadow-[0_0_30px_rgba(34,197,94,0.2)]"
+                        >
+                            <CheckCircle2 size={38} strokeWidth={1.5} />
+                        </motion.div>
+
+                        <h3 className="text-2xl font-bold text-white mb-2">You're on the list! 🎉</h3>
+                        <p className="text-zinc-400 text-sm leading-relaxed max-w-xs">
+                            We've received your inquiry. Check your WhatsApp — a confirmation from <span className="text-white font-medium">NousKūn AI</span> is on its way.
                         </p>
+
+                        <div className="my-5 w-full border-t border-white/5" />
+
+                        <div className="flex items-center gap-2 text-xs text-zinc-500 mb-5">
+                            <MessageCircle size={14} className="text-green-500" />
+                            <span>Acknowledgement sent to your WhatsApp</span>
+                        </div>
+
                         <button
                             onClick={() => setIsSuccess(false)}
-                            className="mt-6 text-ai-blue text-sm hover:underline"
+                            className="text-ai-blue text-xs font-mono tracking-widest uppercase hover:underline opacity-70 hover:opacity-100 transition-opacity"
                         >
-                            Send another request
+                            ← Submit another request
                         </button>
                     </motion.div>
                 )}
@@ -107,6 +132,20 @@ export default function WhatsAppForm() {
                     <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider">Connect Your Systems</p>
                 </div>
             </div>
+
+            {/* Pre-filled Interest Badge */}
+            {prefilledInterest && (
+                <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-5 flex items-center gap-2 bg-ai-blue/10 border border-ai-blue/20 rounded-lg px-4 py-2.5"
+                >
+                    <Sparkles size={13} className="text-ai-blue flex-shrink-0" />
+                    <span className="text-xs text-zinc-300">
+                        Inquiring about: <span className="text-white font-semibold">{prefilledInterest}</span>
+                    </span>
+                </motion.div>
+            )}
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Name Field */}

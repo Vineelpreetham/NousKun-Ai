@@ -1,11 +1,10 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useChat, UIMessage } from '@ai-sdk/react';
+import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
-import Link from 'next/link';
+import { MessageSquare, X, Send, Bot, User, Loader2, CalendarCheck } from 'lucide-react';
 
 export default function AiStrategistWidget() {
     const [isOpen, setIsOpen] = useState(false);
@@ -42,11 +41,26 @@ export default function AiStrategistWidget() {
         setLocalInput('');
     };
 
-    const getMessageText = (m: any) => {
+    const READY_SIGNAL = '[READY_TO_BOOK]';
+
+    const getMessageText = (m: any): string => {
+        let raw = '';
         if (m.parts && Array.isArray(m.parts)) {
-            return m.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('');
+            raw = m.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('');
+        } else {
+            raw = m.content || '';
         }
-        return m.content || '';
+        return raw.replace(READY_SIGNAL, '').trim();
+    };
+
+    const hasReadySignal = (m: any): boolean => {
+        let raw = '';
+        if (m.parts && Array.isArray(m.parts)) {
+            raw = m.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('');
+        } else {
+            raw = m.content || '';
+        }
+        return raw.includes(READY_SIGNAL);
     };
 
     return (
@@ -107,16 +121,32 @@ export default function AiStrategistWidget() {
                                                 : 'bg-white/5 text-zinc-200 border border-white/5 rounded-tl-none'
                                                 }`}>
                                                 {textContent}
-
-                                                {/* Detect if CTA is likely present to show button */}
-                                                {m.role === 'assistant' && textContent.toLowerCase().includes('book') && textContent.toLowerCase().includes('call') && (
-                                                    <div className="mt-4 pt-3 border-t border-white/10">
-                                                        <a href="#contact" onClick={() => setIsOpen(false)} className="inline-block w-full text-center py-2 px-4 bg-white text-black font-semibold rounded-md text-xs hover:bg-zinc-200 transition-colors">
-                                                            Book Strategy Call
-                                                        </a>
-                                                    </div>
-                                                )}
                                             </div>
+
+                                            {/* CTA Card — shown when AI signals [READY_TO_BOOK] */}
+                                            {m.role === 'assistant' && hasReadySignal(m) && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 8 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    transition={{ duration: 0.4, delay: 0.3 }}
+                                                    className="mt-3 bg-gradient-to-br from-ai-blue/15 to-blue-900/10 border border-ai-blue/30 rounded-xl p-4 space-y-3"
+                                                >
+                                                    <div className="flex items-center gap-2">
+                                                        <CalendarCheck size={16} className="text-ai-blue" />
+                                                        <span className="text-white text-xs font-semibold">Ready to get started?</span>
+                                                    </div>
+                                                    <p className="text-zinc-400 text-xs leading-relaxed">
+                                                        Book a free 30-min strategy call. We'll map out your system architecture live.
+                                                    </p>
+                                                    <a
+                                                        href="/#contact"
+                                                        onClick={() => setIsOpen(false)}
+                                                        className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-ai-blue hover:bg-blue-600 text-white font-bold rounded-lg text-xs transition-all shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]"
+                                                    >
+                                                        BOOK STRATEGY CALL
+                                                    </a>
+                                                </motion.div>
+                                            )}
                                         </div>
                                     </div>
                                 );

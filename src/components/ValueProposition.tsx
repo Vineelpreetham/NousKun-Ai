@@ -65,13 +65,14 @@ export default function ValueProposition() {
                     >
                         Build My AI System
                     </button>
-                    <button
-                        onClick={() => document.getElementById('system')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="w-full md:w-auto px-8 py-4 border border-zinc-700 text-zinc-300 font-mono text-sm tracking-widest uppercase rounded-sm hover:border-white hover:text-white transition-all duration-300 group"
+                    <a
+                        href="/case-studies"
+                        className="w-full md:w-auto px-8 py-4 border border-zinc-700 text-zinc-300 font-mono text-sm tracking-widest uppercase rounded-sm hover:border-white hover:text-white transition-all duration-300 group text-center"
                     >
-                        See How It Works <span className="inline-block transition-transform group-hover:translate-x-1">-&gt;</span>
-                    </button>
+                        See Our Work <span className="inline-block transition-transform group-hover:translate-x-1">-&gt;</span>
+                    </a>
                 </div>
+
             </div>
         </section>
     );

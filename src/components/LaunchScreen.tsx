@@ -18,11 +18,24 @@ export default function LaunchScreen({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         setMounted(true);
-        // Check if the user has already seen the launch screen
-        const launched = localStorage.getItem('nouskun_launched');
-        if (launched) {
-            setHasLaunched(true);
-        } else {
+        // Check if the user has already seen the launch screen in the last 24 hours
+        const lastLaunchedStr = localStorage.getItem('nouskun_launched_time');
+
+        let shouldShow = true;
+
+        if (lastLaunchedStr) {
+            const lastLaunchedTime = parseInt(lastLaunchedStr, 10);
+            const now = new Date().getTime();
+            const hours24 = 24 * 60 * 60 * 1000;
+
+            // If it has been less than 24 hours since they last saw it, skip the launch screen
+            if (now - lastLaunchedTime < hours24) {
+                shouldShow = false;
+                setHasLaunched(true);
+            }
+        }
+
+        if (shouldShow) {
             // Small delay to ensure hydration before showing
             setTimeout(() => {
                 setHasLaunched(false);
@@ -36,7 +49,8 @@ export default function LaunchScreen({ children }: { children: React.ReactNode }
             setStage(STAGES.LOGO);
             setTimeout(() => {
                 setHasLaunched(true);
-                localStorage.setItem('nouskun_launched', 'true');
+                // Store the current timestamp instead of a boolean
+                localStorage.setItem('nouskun_launched_time', new Date().getTime().toString());
             }, 3000);
         }, 4500);
     };

@@ -18,25 +18,24 @@ export default function LaunchScreen({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         setMounted(true);
-        // Check if the user has already seen the launch screen in the last 24 hours
-        const lastLaunchedStr = localStorage.getItem('nouskun_launched_time');
 
-        let shouldShow = true;
+        // Set launch window to end tomorrow night
+        const LAUNCH_WINDOW_END = new Date('2026-03-09T23:59:59').getTime();
+        const now = new Date().getTime();
 
-        if (lastLaunchedStr) {
-            const lastLaunchedTime = parseInt(lastLaunchedStr, 10);
-            const now = new Date().getTime();
-            const hours24 = 24 * 60 * 60 * 1000;
-
-            // If it has been less than 24 hours since they last saw it, skip the launch screen
-            if (now - lastLaunchedTime < hours24) {
-                shouldShow = false;
-                setHasLaunched(true);
-            }
+        // IF we are currently in the 24-hour launch window, ALWAYS show the launch screen
+        if (now < LAUNCH_WINDOW_END) {
+            setTimeout(() => {
+                setHasLaunched(false);
+            }, 100);
+            return;
         }
 
-        if (shouldShow) {
-            // Small delay to ensure hydration before showing
+        // AFTER the launch window, go back to normal "only once per user" behavior
+        const launched = localStorage.getItem('nouskun_launched_v2');
+        if (launched) {
+            setHasLaunched(true);
+        } else {
             setTimeout(() => {
                 setHasLaunched(false);
             }, 100);
@@ -49,8 +48,8 @@ export default function LaunchScreen({ children }: { children: React.ReactNode }
             setStage(STAGES.LOGO);
             setTimeout(() => {
                 setHasLaunched(true);
-                // Store the current timestamp instead of a boolean
-                localStorage.setItem('nouskun_launched_time', new Date().getTime().toString());
+                // Save string for post-launch behavior
+                localStorage.setItem('nouskun_launched_v2', 'true');
             }, 3000);
         }, 4500);
     };

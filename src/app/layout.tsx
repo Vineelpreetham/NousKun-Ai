@@ -62,8 +62,8 @@ export default function RootLayout({
               {children}
             </main>
           </SmoothScroll>
-          <AiStrategistWidget />
         </LaunchScreen>
+        <AiStrategistWidget />
       </body>
     </html>
   );

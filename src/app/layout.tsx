@@ -60,9 +60,9 @@ export default function RootLayout({
           <SmoothScroll>
             <main className="min-h-screen flex flex-col overflow-x-hidden w-full max-w-[100vw]">
               {children}
-              <AiStrategistWidget />
             </main>
           </SmoothScroll>
+          <AiStrategistWidget />
         </LaunchScreen>
       </body>
     </html>

@@ -198,7 +198,7 @@ export default function AiStrategistWidget() {
             {/* Floating Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-4 md:right-8 w-14 h-14 bg-white hover:bg-zinc-200 text-black rounded-full shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center justify-center transition-all z-50 group border border-white/20"
+                className="fixed bottom-6 right-4 md:right-8 w-14 h-14 bg-white hover:bg-zinc-200 text-black rounded-full shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center justify-center transition-all z-[9999] group border border-white/20"
             >
                 <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full border-2 border-black animate-pulse" />
                 {isOpen ? (

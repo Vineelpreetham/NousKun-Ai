@@ -70,9 +70,9 @@ export default function Navigation() {
         <>
             <nav
                 ref={navRef}
-                className="fixed top-0 left-0 w-full z-50 px-6 md:px-8 py-6 flex items-center justify-between border-b border-transparent transition-colors duration-500 backdrop-blur-sm"
+                className="fixed top-0 left-0 w-full z-[110] px-6 md:px-8 py-6 flex items-center justify-between border-b border-transparent transition-colors duration-500 backdrop-blur-sm"
             >
-                <Link href="/" className="z-50">
+                <Link href="/" className="z-[110]">
                     <div ref={logoRef} className="text-xl font-bold tracking-tighter text-white cursor-pointer">
                         NOUSKŪN <span className="text-ai-blue">AI</span>
                     </div>
@@ -111,7 +111,7 @@ export default function Navigation() {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="md:hidden z-50 text-white p-2 focus:outline-none"
+                    className="md:hidden z-[110] text-white p-2 focus:outline-none"
                     aria-label="Toggle Menu"
                 >
                     {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -126,44 +126,47 @@ export default function Navigation() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="fixed inset-0 z-40 bg-zinc-950 flex flex-col items-center justify-center space-y-8 md:hidden"
+                        className="fixed inset-0 z-[100] bg-zinc-950 flex flex-col items-center justify-center md:hidden"
                     >
                         {/* Background Elements */}
                         <div className="absolute inset-0 pointer-events-none opacity-20">
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-ai-blue/10 rounded-full blur-[80px]" />
                         </div>
 
-                        <ul className="flex flex-col items-center gap-8 relative z-10">
-                            {navItems.map((item, i) => (
-                                <motion.li
-                                    key={item.name}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.1 + i * 0.1 }}
-                                >
-                                    <Link
-                                        href={item.path}
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className={clsx(
-                                            'text-3xl font-bold tracking-tighter hover:text-ai-blue transition-colors',
-                                            pathname === item.path ? 'text-ai-blue' : 'text-white'
-                                        )}
+                        {/* Content Wrapper offset upwards to account for visual weight */}
+                        <div className="flex flex-col items-center gap-8 relative z-10 -mt-20">
+                            <ul className="flex flex-col items-center gap-8">
+                                {navItems.map((item, i) => (
+                                    <motion.li
+                                        key={item.name}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.1 + i * 0.1 }}
                                     >
-                                        {item.name}
-                                    </Link>
-                                </motion.li>
-                            ))}
-                        </ul>
+                                        <Link
+                                            href={item.path}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className={clsx(
+                                                'text-3xl font-bold tracking-tighter hover:text-ai-blue transition-colors',
+                                                pathname === item.path ? 'text-ai-blue' : 'text-white'
+                                            )}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </motion.li>
+                                ))}
+                            </ul>
 
-                        <motion.button
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                            onClick={scrollToContact}
-                            className="px-8 py-3 rounded-sm border border-ai-blue text-ai-blue tracking-widest uppercase font-mono text-sm hover:bg-ai-blue hover:text-white transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
-                        >
-                            INITIATE SYSTEM
-                        </motion.button>
+                            <motion.button
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.5 }}
+                                onClick={scrollToContact}
+                                className="px-8 py-3 rounded-sm border border-ai-blue text-ai-blue tracking-widest uppercase font-mono text-sm hover:bg-ai-blue hover:text-white transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+                            >
+                                INITIATE SYSTEM
+                            </motion.button>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

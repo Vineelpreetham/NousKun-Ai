@@ -6,7 +6,7 @@ import MobileNav from '@/components/MobileNav';
 import GrainOverlay from '@/components/ui/GrainOverlay';
 import SmoothScroll from '@/components/SmoothScroll';
 import AiStrategistWidget from '@/components/AiStrategistWidget';
-import LaunchScreen from '@/components/LaunchScreen';
+
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -53,16 +53,14 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`font-sans antialiased bg-ai-black text-foreground selection:bg-ai-blue selection:text-white`}
       >
-        <LaunchScreen>
-          <GrainOverlay />
-          <Navigation />
-          {/* <MobileNav /> */}
-          <SmoothScroll>
-            <main className="min-h-screen flex flex-col overflow-x-hidden w-full max-w-[100vw]">
-              {children}
-            </main>
-          </SmoothScroll>
-        </LaunchScreen>
+        <GrainOverlay />
+        <Navigation />
+        {/* <MobileNav /> */}
+        <SmoothScroll>
+          <main className="min-h-screen flex flex-col overflow-x-hidden w-full max-w-[100vw]">
+            {children}
+          </main>
+        </SmoothScroll>
         <AiStrategistWidget />
       </body>
     </html>

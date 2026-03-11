@@ -8,7 +8,7 @@ import {
     CardDescription,
     CardContent,
 } from "@/components/ui/card";
-import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Check, X } from "lucide-react";
@@ -96,19 +96,25 @@ export function PricingModule({
                                         Starting From
                                     </p>
 
-                                    <Link href="#contact" className="w-full">
-                                        <Button
-                                            variant={plan.recommended ? "default" : "outline"}
-                                            className={cn(
-                                                "w-full mb-3 md:mb-6 py-4 md:py-6 rounded-2xl font-bold tracking-wide transition-all text-xs md:text-base",
-                                                plan.recommended
-                                                    ? "bg-ai-blue hover:bg-ai-blue-dim text-white border-none shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
-                                                    : "bg-transparent border-white/20 text-white hover:bg-white/5 hover:border-white/40"
-                                            )}
-                                        >
-                                            {buttonLabel}
-                                        </Button>
-                                    </Link>
+                                    <Button
+                                        variant={plan.recommended ? "default" : "outline"}
+                                        className={cn(
+                                            "w-full mb-3 md:mb-6 py-4 md:py-6 rounded-2xl font-bold tracking-wide transition-all text-xs md:text-base cursor-pointer",
+                                            plan.recommended
+                                                ? "bg-ai-blue hover:bg-ai-blue-dim text-white border-none shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
+                                                : "bg-transparent border-white/20 text-white hover:bg-white/5 hover:border-white/40"
+                                        )}
+                                        onClick={() => {
+                                            const contactEl = document.getElementById('contact');
+                                            if (contactEl) {
+                                                contactEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            } else {
+                                                window.location.href = '/#contact';
+                                            }
+                                        }}
+                                    >
+                                        {buttonLabel}
+                                    </Button>
 
                                     <div className="text-left mt-auto bg-white/5 rounded-xl p-2.5 md:p-4">
                                         <h4 className="font-mono text-[8px] md:text-xs uppercase tracking-widest text-zinc-400 mb-1.5 md:mb-3 opacity-70">Highlights</h4>

@@ -6,6 +6,7 @@ import MobileNav from '@/components/MobileNav';
 import GrainOverlay from '@/components/ui/GrainOverlay';
 import SmoothScroll from '@/components/SmoothScroll';
 import AiStrategistWidget from '@/components/AiStrategistWidget';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 
 const jetbrainsMono = JetBrains_Mono({
@@ -62,6 +63,7 @@ export default function RootLayout({
           </main>
         </SmoothScroll>
         <AiStrategistWidget />
+        <SpeedInsights />
       </body>
     </html>
   );

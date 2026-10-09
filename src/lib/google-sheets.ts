@@ -23,11 +23,11 @@ export class GoogleSheetService {
         this.sheets = google.sheets({ version: 'v4', auth: this.auth });
     }
 
-    async appendRow(spreadsheetId: string, values: any[]) {
+    async appendRow(spreadsheetId: string, values: any[], range: string = 'Sheet1!A1') {
         try {
             const response = await this.sheets.spreadsheets.values.append({
                 spreadsheetId,
-                range: 'Sheet1!A1', // Appends to the first sheet
+                range, // Defaults to the first sheet
                 valueInputOption: 'USER_ENTERED',
                 requestBody: {
                     values: [values],

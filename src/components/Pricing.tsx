@@ -1,252 +1,226 @@
 'use client';
 
 import { useState } from 'react';
-import { PricingModule, PricingPlan } from '@/components/ui/pricing-module';
-import {
-    Code2,
-    Rocket,
-    Gem,
-    Bot,
-    Workflow,
-    BrainCircuit,
-    Database,
-    BarChart3,
-    LineChart
-} from 'lucide-react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Check, Minus, ArrowRight } from 'lucide-react';
+import { WordsReveal, Reveal } from '@/components/motion/Reveal';
+import { scrollToContact } from '@/components/site/Nav';
 import { cn } from '@/lib/utils';
 
-// --- Data Definition ---
+type Plan = {
+    name: string;
+    blurb: string;
+    price: number;
+    features: { label: string; included: boolean }[];
+    recommended?: boolean;
+};
 
-const webPlans: PricingPlan[] = [
-    {
-        id: 'web-starter',
-        name: 'Starter',
-        description: 'Perfect for early-stage founders launching their first digital presence.',
-        icon: <Code2 className="w-8 h-8" />,
-        priceMonthly: 29000,
-        priceYearly: 29000 * 10,
-        users: 'Ideal for early-stage startups',
-        features: [
-            { label: 'Responsive Design', included: true },
-            { label: 'Core UX/UI & Animations', included: true },
-            { label: 'CMS Setup', included: true },
-            { label: 'Standard SEO Setup', included: true },
-            { label: 'Basic Analytics', included: true },
-        ]
-    },
-    {
-        id: 'web-growth',
-        name: 'Growth Systems',
-        description: 'For serious businesses wanting performance + conversion focus.',
-        icon: <Rocket className="w-8 h-8" />,
-        priceMonthly: 55000,
-        priceYearly: 55000 * 10,
-        users: 'For growing businesses',
-        features: [
-            { label: 'Advanced UI & Motion Effects', included: true },
-            { label: 'Conversion-Focused UX', included: true },
-            { label: 'Technical SEO Optimization', included: true },
-            { label: 'Funnel Analytics & Heatmaps', included: true },
-            { label: 'Performance Optimization', included: true },
-        ],
-        recommended: true,
-    },
-    {
-        id: 'web-scale',
-        name: 'Scale Infrastructure',
-        description: 'Full custom architecture, growth analytics, and advanced integrations.',
-        icon: <Gem className="w-8 h-8" />,
-        priceMonthly: 110000,
-        priceYearly: 110000 * 10,
-        users: 'For market leaders',
-        features: [
-            { label: 'Custom Web Architecture', included: true },
-            { label: 'Predictive Growth Analytics', included: true },
-            { label: 'Complex Backend Integration', included: true },
-            { label: 'Dedicated Design Team', included: true },
-            { label: 'Weekly Growth Sprints', included: true },
-        ]
-    }
-];
+const plans: Record<'ai' | 'web' | 'saas', Plan[]> = {
+    ai: [
+        {
+            name: 'Starter Agent',
+            blurb: 'Lead capture, an AI chatbot and automated email follow-ups.',
+            price: 29000,
+            features: [
+                { label: 'AI chatbot for your website', included: true },
+                { label: 'Lead capture & sync', included: true },
+                { label: 'Automated email sequences', included: true },
+                { label: 'Zapier / Make hooks', included: false },
+                { label: 'Voice AI', included: false },
+            ],
+        },
+        {
+            name: 'Autopilot Growth',
+            blurb: 'Conversational agents, WhatsApp automation and CRM routing.',
+            price: 59000,
+            recommended: true,
+            features: [
+                { label: 'Custom-trained AI chatbot', included: true },
+                { label: 'WhatsApp Business API automation', included: true },
+                { label: 'Multi-step workflows (Make / n8n)', included: true },
+                { label: 'Intelligent lead qualification', included: true },
+                { label: 'Two-way CRM integration', included: true },
+            ],
+        },
+        {
+            name: 'Enterprise Matrix',
+            blurb: 'A full AI ecosystem: agents, knowledge bases and voice.',
+            price: 120000,
+            features: [
+                { label: 'Custom RAG knowledge base', included: true },
+                { label: 'Multi-agent systems', included: true },
+                { label: 'Voice AI phone agents', included: true },
+                { label: 'Data pipelines & security', included: true },
+                { label: 'Dedicated AI engineer', included: true },
+            ],
+        },
+    ],
+    web: [
+        {
+            name: 'Starter',
+            blurb: 'A polished, fast first website for early-stage founders.',
+            price: 29000,
+            features: [
+                { label: 'Responsive design', included: true },
+                { label: 'Core UX/UI & animations', included: true },
+                { label: 'CMS setup', included: true },
+                { label: 'Standard SEO setup', included: true },
+                { label: 'Basic analytics', included: true },
+            ],
+        },
+        {
+            name: 'Growth Systems',
+            blurb: 'Performance and conversion focus for serious businesses.',
+            price: 55000,
+            recommended: true,
+            features: [
+                { label: 'Advanced UI & motion', included: true },
+                { label: 'Conversion-focused UX', included: true },
+                { label: 'Technical SEO', included: true },
+                { label: 'Funnel analytics & heatmaps', included: true },
+                { label: 'Performance optimisation', included: true },
+            ],
+        },
+        {
+            name: 'Scale Infrastructure',
+            blurb: 'Custom architecture, growth analytics and deep integrations.',
+            price: 110000,
+            features: [
+                { label: 'Custom web architecture', included: true },
+                { label: 'Predictive growth analytics', included: true },
+                { label: 'Complex backend integration', included: true },
+                { label: 'Dedicated design team', included: true },
+                { label: 'Weekly growth sprints', included: true },
+            ],
+        },
+    ],
+    saas: [
+        {
+            name: 'AI MVP',
+            blurb: 'Rapid AI product prototype to validate your market.',
+            price: 75000,
+            features: [
+                { label: 'Core AI model integration', included: true },
+                { label: 'User authentication', included: true },
+                { label: 'Stripe billing', included: true },
+                { label: 'MVP UI/UX design', included: true },
+                { label: 'Scalable cloud hosting', included: false },
+            ],
+        },
+        {
+            name: 'SaaS Platform',
+            blurb: 'A fully featured AI platform ready for real users.',
+            price: 150000,
+            recommended: true,
+            features: [
+                { label: 'Advanced AI pipelines & RAG', included: true },
+                { label: 'Tiered subscriptions', included: true },
+                { label: 'Admin & user dashboards', included: true },
+                { label: 'Custom API development', included: true },
+                { label: 'Scalable AWS / GCP infra', included: true },
+            ],
+        },
+        {
+            name: 'Enterprise App',
+            blurb: 'Bespoke AI with compliance and custom models.',
+            price: 300000,
+            features: [
+                { label: 'Fine-tuned / custom LLMs', included: true },
+                { label: 'Enterprise security & compliance', included: true },
+                { label: 'Multi-tenant architecture', included: true },
+                { label: 'Dedicated infra management', included: true },
+                { label: '24/7 priority support & SLAs', included: true },
+            ],
+        },
+    ],
+};
 
-const aiPlans: PricingPlan[] = [
-    {
-        id: 'ai-starter',
-        name: 'Starter Agent',
-        description: 'Basic autonomous lead capture + email and simple chat workflows.',
-        icon: <Bot className="w-8 h-8" />,
-        priceMonthly: 29000,
-        priceYearly: 29000 * 10,
-        users: 'Entry-level automation',
-        features: [
-            { label: 'Basic AI Chatbot (GPT-4o mini)', included: true },
-            { label: 'Lead Capture & Sync (Simple)', included: true },
-            { label: 'Automated Email Sequences', included: true },
-            { label: 'Standard Zapier Hooks', included: false },
-            { label: 'Voice AI Integration', included: false },
-        ]
-    },
-    {
-        id: 'ai-growth',
-        name: 'Autopilot Growth',
-        description: 'Advanced conversational agents + WhatsApp automation + CRM routing.',
-        icon: <Workflow className="w-8 h-8" />,
-        priceMonthly: 59000,
-        priceYearly: 59000 * 10,
-        users: 'Business process automation',
-        features: [
-            { label: 'Custom Trained AI Chatbot (GPT-4o)', included: true },
-            { label: 'WhatsApp Business API Autonomy', included: true },
-            { label: 'Multi-step Agent Workflows (Make/n8n)', included: true },
-            { label: 'Intelligent Lead Qualification logic', included: true },
-            { label: 'Two-way CRM Integration', included: true },
-        ],
-        recommended: true,
-    },
-    {
-        id: 'ai-scale',
-        name: 'Enterprise Matrix',
-        description: 'Full custom AI ecosystem (autonomous agents + internal knowledge bases).',
-        icon: <BrainCircuit className="w-8 h-8" />,
-        priceMonthly: 120000,
-        priceYearly: 120000 * 10,
-        users: 'Enterprise autonomy',
-        features: [
-            { label: 'Custom RAG / Internal Knowledge Base', included: true },
-            { label: 'Multi-Agent Autonomous Systems', included: true },
-            { label: 'Voice AI Phone Agents', included: true },
-            { label: 'Complex Data Pipelines & Security', included: true },
-            { label: 'Dedicated AI Engineer', included: true },
-        ]
-    }
-];
-
-const saasPlans: PricingPlan[] = [
-    {
-        id: 'saas-mvp',
-        name: 'AI MVP',
-        description: 'Rapid prototyping of AI-powered SaaS solutions for market validation.',
-        icon: <Database className="w-8 h-8" />,
-        priceMonthly: 75000,
-        priceYearly: 75000 * 10,
-        users: 'For stealth startups',
-        features: [
-            { label: 'Core AI Model Integration', included: true },
-            { label: 'Basic User Authentication', included: true },
-            { label: 'Stripe Billing Setup', included: true },
-            { label: 'MVP UI/UX Design', included: true },
-            { label: 'Scalable Cloud Hosting', included: false },
-        ]
-    },
-    {
-        id: 'saas-pro',
-        name: 'SaaS Platform',
-        description: 'Fully featured AI software platform ready for user acquisition.',
-        icon: <BarChart3 className="w-8 h-8" />,
-        priceMonthly: 150000,
-        priceYearly: 150000 * 10,
-        users: 'For growing platforms',
-        features: [
-            { label: 'Advanced AI Pipelines & RAG', included: true },
-            { label: 'Tiered Subscription Management', included: true },
-            { label: 'Admin & User Dashboards', included: true },
-            { label: 'Custom API Development', included: true },
-            { label: 'Scalable AWS/GCP Infrastructure', included: true },
-        ],
-        recommended: true,
-    },
-    {
-        id: 'saas-enterprise',
-        name: 'Enterprise App',
-        description: 'Bespoke AI solutions with high compliance and custom large language models.',
-        icon: <LineChart className="w-8 h-8" />,
-        priceMonthly: 300000,
-        priceYearly: 300000 * 10,
-        users: 'For specialized tech',
-        features: [
-            { label: 'Fine-tuned / Custom LLMs', included: true },
-            { label: 'Enterprise Security & Compliance', included: true },
-            { label: 'Multi-tenant Architecture', included: true },
-            { label: 'Dedicated Infrastructure Management', included: true },
-            { label: '24/7 Priority Support & SLAs', included: true },
-        ]
-    }
-];
-
-type Category = 'web' | 'ai' | 'saas';
+const tabs = [
+    { id: 'ai', label: 'AI & Automation' },
+    { id: 'web', label: 'Websites' },
+    { id: 'saas', label: 'AI SaaS' },
+] as const;
 
 export default function Pricing() {
-    const [activeCategory, setActiveCategory] = useState<Category>('ai');
-
-    const categories: { id: Category; label: string }[] = [
-        { id: 'ai', label: 'AI & Automation' },
-        { id: 'web', label: 'Intelligent Web & Growth Systems' },
-        { id: 'saas', label: 'SaaS using AI' },
-    ];
-
-    const getPlans = () => {
-        switch (activeCategory) {
-            case 'web': return webPlans;
-            case 'ai': return aiPlans;
-            case 'saas': return saasPlans;
-            default: return webPlans;
-        }
-    };
+    const [tab, setTab] = useState<(typeof tabs)[number]['id']>('ai');
 
     return (
-        <section id="pricing" className="bg-ai-black min-h-screen relative py-12 md:py-24 border-t border-white/10 shadow-[0_-20px_60px_rgba(0,0,0,0.5)]">
+        <section id="pricing" className="relative px-5 py-24 md:px-8 md:py-32">
+            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/10 blur-[140px]" />
+            <div className="relative mx-auto max-w-6xl">
+                <div className="mb-12 text-center">
+                    <h2 className="text-[clamp(2.25rem,5vw,4rem)] font-medium leading-[1] tracking-[-0.04em] text-paper">
+                        <WordsReveal text="Clear pricing." />{' '}
+                        <WordsReveal text="Serious ROI." className="serif text-brand-soft" delay={0.15} />
+                    </h2>
+                    <Reveal delay={0.2}>
+                        <p className="mx-auto mt-5 max-w-lg text-muted">Starting prices in INR. Every project gets a fixed quote after a free call — no surprises.</p>
+                    </Reveal>
 
-            {/* Category Switcher */}
-            <div className="container mx-auto px-4 mb-2">
-                <div className="max-w-6xl mx-auto text-center">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-tighter">Strategic Investment</h2>
-                    <p className="text-zinc-400 mb-6 md:mb-12 max-w-2xl mx-auto">
-                        Transparent pricing designed to scale with your ambition. Choose the intelligence layer that fits your growth stage.
-                    </p>
+                    <Reveal delay={0.25} className="mt-10 inline-flex rounded-full border border-line bg-white/[0.03] p-1">
+                        {tabs.map((t) => (
+                            <button
+                                key={t.id}
+                                onClick={() => setTab(t.id)}
+                                className={cn('relative rounded-full px-4 py-2 text-sm transition-colors md:px-6', tab === t.id ? 'text-ink' : 'text-muted hover:text-paper')}
+                            >
+                                {tab === t.id && (
+                                    <motion.span layoutId="price-tab" className="absolute inset-0 rounded-full bg-paper" transition={{ type: 'spring', stiffness: 400, damping: 34 }} />
+                                )}
+                                <span className="relative">{t.label}</span>
+                            </button>
+                        ))}
+                    </Reveal>
+                </div>
 
-                    <div className="relative inline-block max-w-full w-full">
-                        <div className="flex flex-wrap justify-center gap-2 p-1 bg-white/5 rounded-xl border border-white/10 mb-6 md:mb-8 w-full md:w-auto mx-auto">
-                            {categories.map((cat) => (
-                                <button
-                                    key={cat.id}
-                                    onClick={() => setActiveCategory(cat.id)}
-                                    className={cn(
-                                        "px-3 py-2 md:px-6 md:py-3 rounded-lg text-[10px] md:text-sm font-medium transition-all leading-tight flex-1 md:flex-none min-w-[30%]",
-                                        activeCategory === cat.id
-                                            ? "bg-ai-blue text-white shadow-lg shadow-ai-blue/20"
-                                            : "text-zinc-400 hover:text-white hover:bg-white/5"
-                                    )}
-                                >
-                                    {cat.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
+                <div className="grid gap-4 md:grid-cols-3">
+                    <AnimatePresence mode="popLayout">
+                        {plans[tab].map((p, i) => (
+                            <motion.div
+                                key={tab + p.name}
+                                initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+                                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                exit={{ opacity: 0, y: -12, filter: 'blur(6px)' }}
+                                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                                className={cn('relative rounded-3xl p-px', p.recommended ? 'overflow-hidden' : '')}
+                            >
+                                {p.recommended && (
+                                    <div className="absolute left-1/2 top-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-spin-slow bg-[conic-gradient(from_0deg,transparent_0%,#4d8eff_10%,transparent_25%,transparent_50%,#9cc0ff_60%,transparent_75%)]" />
+                                )}
+                                <div className={cn('relative flex h-full flex-col rounded-[23px] border p-7', p.recommended ? 'border-transparent bg-ink-2' : 'border-line bg-surface/70')}>
+                                    <div className="mb-6 flex items-center justify-between">
+                                        <h3 className="text-lg font-medium text-paper">{p.name}</h3>
+                                        {p.recommended && <span className="rounded-full bg-brand/15 px-2.5 py-1 text-xs text-brand-soft">Most popular</span>}
+                                    </div>
+                                    <p className="text-sm text-muted">Starting from</p>
+                                    <p className="mb-3 text-4xl font-medium tracking-[-0.04em] text-paper md:text-5xl">₹{p.price.toLocaleString('en-IN')}</p>
+                                    <p className="mb-7 min-h-[40px] text-sm leading-relaxed text-muted">{p.blurb}</p>
+
+                                    <ul className="mb-8 space-y-3">
+                                        {p.features.map((f) => (
+                                            <li key={f.label} className={cn('flex items-start gap-3 text-sm', f.included ? 'text-paper/85' : 'text-muted/50')}>
+                                                {f.included ? <Check size={16} className="mt-0.5 shrink-0 text-brand-soft" /> : <Minus size={16} className="mt-0.5 shrink-0" />}
+                                                {f.label}
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <button
+                                        onClick={scrollToContact}
+                                        className={cn(
+                                            'group mt-auto flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-medium transition-all',
+                                            p.recommended ? 'bg-brand text-white hover:shadow-[0_0_30px_-4px_rgba(77,142,255,0.7)]' : 'border border-line text-paper hover:bg-white/[0.06]'
+                                        )}
+                                    >
+                                        Get a quote
+                                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                                    </button>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                 </div>
             </div>
-
-            {/* Pricing Module */}
-            <div className="relative">
-                {/* Background Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-ai-blue/5 rounded-full blur-[120px] pointer-events-none" />
-
-                <motion.div
-                    key={activeCategory}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <PricingModule
-                        title={categories.find(c => c.id === activeCategory)?.label}
-                        subtitle="Detailed breakdown of features and capabilities."
-                        plans={getPlans()}
-                        buttonLabel="Inquire Now"
-                        className="bg-transparent pt-0" // Remove background/padding as wrapper handles it
-                    />
-                </motion.div>
-            </div>
-
         </section>
     );
 }

@@ -78,130 +78,110 @@ export default function WhatsAppForm() {
         }
     };
 
-    return (
-        <div className="w-full max-w-md mx-auto bg-ai-card border border-white/5 p-8 rounded-2xl shadow-[0_0_50px_rgba(59,130,246,0.05)] backdrop-blur-sm relative overflow-hidden">
 
-            {/* Success Overlay */}
+    const field =
+        'peer w-full rounded-xl border border-line bg-ink/60 px-4 pb-2.5 pt-6 text-[15px] text-paper outline-none transition-colors placeholder:text-transparent focus:border-brand/60 focus:bg-ink';
+    const label =
+        'pointer-events-none absolute left-4 top-2 text-[11px] font-medium uppercase tracking-wider text-muted transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal peer-focus:top-2 peer-focus:text-[11px] peer-focus:uppercase peer-focus:tracking-wider peer-focus:text-brand-soft';
+
+    return (
+        <div className="relative w-full overflow-hidden rounded-3xl border border-line bg-surface/80 p-6 backdrop-blur-xl md:p-8">
             <AnimatePresence>
                 {isSuccess && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.97 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.97 }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                        className="absolute inset-0 bg-ai-card z-20 flex flex-col items-center justify-center text-center p-8 rounded-2xl"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-surface p-8 text-center"
                     >
-                        {/* Animated checkmark */}
                         <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
-                            className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-400 mb-5 shadow-[0_0_30px_rgba(34,197,94,0.2)]"
+                            initial={{ scale: 0, rotate: -45 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            transition={{ type: 'spring', stiffness: 220, damping: 14 }}
+                            className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-400"
                         >
-                            <CheckCircle2 size={38} strokeWidth={1.5} />
+                            <CheckCircle2 size={32} strokeWidth={1.5} />
                         </motion.div>
-
-                        <h3 className="text-2xl font-bold text-white mb-2">You're on the list! 🎉</h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed max-w-xs">
-                            We've received your inquiry. Check your WhatsApp — a confirmation from <span className="text-white font-medium">NousKūn AI</span> is on its way.
+                        <h3 className="mb-2 text-2xl font-medium tracking-tight text-paper">Got it — talk soon.</h3>
+                        <p className="max-w-xs text-sm leading-relaxed text-muted">
+                            We&apos;ve sent a confirmation to your WhatsApp. The NousKun team will reach out shortly.
                         </p>
-
-                        <div className="my-5 w-full border-t border-white/5" />
-
-                        <div className="flex items-center gap-2 text-xs text-zinc-500 mb-5">
-                            <MessageCircle size={14} className="text-green-500" />
-                            <span>Acknowledgement sent to your WhatsApp</span>
-                        </div>
-
                         <button
                             onClick={() => setIsSuccess(false)}
-                            className="text-ai-blue text-xs font-mono tracking-widest uppercase hover:underline opacity-70 hover:opacity-100 transition-opacity"
+                            className="mt-6 text-sm text-brand-soft underline-offset-4 hover:underline"
                         >
-                            ← Submit another request
+                            Send another request
                         </button>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-                    <MessageCircle size={20} />
-                </div>
+            <div className="mb-6 flex items-center justify-between">
                 <div>
-                    <h3 className="text-xl font-bold text-white">Book a Free Consultation</h3>
-                    <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider">Connect Your Systems</p>
+                    <h3 className="text-xl font-medium tracking-tight text-paper">Book a free consultation</h3>
+                    <p className="mt-1 text-sm text-muted">30 minutes. No pitch deck. Just your problem.</p>
                 </div>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-400/10 text-emerald-400">
+                    <MessageCircle size={18} />
+                </span>
             </div>
 
-            {/* Pre-filled Interest Badge */}
             {prefilledInterest && (
-                <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-5 flex items-center gap-2 bg-ai-blue/10 border border-ai-blue/20 rounded-lg px-4 py-2.5"
-                >
-                    <Sparkles size={13} className="text-ai-blue flex-shrink-0" />
-                    <span className="text-xs text-zinc-300">
-                        Inquiring about: <span className="text-white font-semibold">{prefilledInterest}</span>
+                <div className="mb-5 flex items-center gap-2 rounded-xl border border-brand/20 bg-brand/10 px-4 py-2.5">
+                    <Sparkles size={13} className="shrink-0 text-brand-soft" />
+                    <span className="text-xs text-paper/80">
+                        Interested in: <span className="font-semibold text-paper">{prefilledInterest}</span>
                     </span>
-                </motion.div>
+                </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                {/* Name Field */}
-                <div className="space-y-1">
-                    <label className="text-xs font-mono text-zinc-400 uppercase tracking-widest">Your Name</label>
-                    <input
-                        {...register('name')}
-                        className="w-full bg-ai-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-ai-blue/50 transition-colors placeholder:text-zinc-700"
-                        placeholder="John Doe"
-                    />
-                    {errors.name && <p className="text-red-400 text-xs">{errors.name.message}</p>}
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3" noValidate>
+                <div className="grid gap-3 sm:grid-cols-2">
+                    <div>
+                        <div className="relative">
+                            <input id="f-name" {...register('name')} placeholder="Your name" autoComplete="name" className={field} />
+                            <label htmlFor="f-name" className={label}>Your name</label>
+                        </div>
+                        {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>}
+                    </div>
+                    <div>
+                        <div className="relative">
+                            <input id="f-biz" {...register('businessName')} placeholder="Business name" autoComplete="organization" className={field} />
+                            <label htmlFor="f-biz" className={label}>Business name</label>
+                        </div>
+                        {errors.businessName && <p className="mt-1 text-xs text-red-400">{errors.businessName.message}</p>}
+                    </div>
                 </div>
 
-                {/* Business Name Field */}
-                <div className="space-y-1">
-                    <label className="text-xs font-mono text-zinc-400 uppercase tracking-widest">Business Name</label>
-                    <input
-                        {...register('businessName')}
-                        className="w-full bg-ai-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-ai-blue/50 transition-colors placeholder:text-zinc-700"
-                        placeholder="Acme Corp"
-                    />
-                    {errors.businessName && <p className="text-red-400 text-xs">{errors.businessName.message}</p>}
+                <div>
+                    <div className="relative">
+                        <select id="f-type" {...register('businessType')} defaultValue="" className={`${field} appearance-none pt-6`}>
+                            <option value="" disabled>Select…</option>
+                            <option value="e-commerce">E-Commerce</option>
+                            <option value="agency">Agency / Service</option>
+                            <option value="saas">SaaS / Tech</option>
+                            <option value="education">Education / Coaching</option>
+                            <option value="real-estate">Real Estate</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <label htmlFor="f-type" className="pointer-events-none absolute left-4 top-2 text-[11px] font-medium uppercase tracking-wider text-muted">
+                            Business type
+                        </label>
+                        <ArrowRight size={14} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-muted" />
+                    </div>
+                    {errors.businessType && <p className="mt-1 text-xs text-red-400">{errors.businessType.message}</p>}
                 </div>
 
-                {/* Business Type Field */}
-                <div className="space-y-1">
-                    <label className="text-xs font-mono text-zinc-400 uppercase tracking-widest">Business Type</label>
-                    <select
-                        {...register('businessType')}
-                        className="w-full bg-ai-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-ai-blue/50 transition-colors appearance-none"
-                    >
-                        <option value="">Select Type...</option>
-                        <option value="e-commerce">E-Commerce</option>
-                        <option value="agency">Agency / Service</option>
-                        <option value="saas">SaaS / Tech</option>
-                        <option value="education">Education / Coaching</option>
-                        <option value="real-estate">Real Estate</option>
-                        <option value="other">Other</option>
-                    </select>
-                    {errors.businessType && <p className="text-red-400 text-xs">{errors.businessType.message}</p>}
-                </div>
-
-                {/* WhatsApp Number Field */}
-                <div className="space-y-1">
-                    <label className="text-xs font-mono text-zinc-400 uppercase tracking-widest">WhatsApp Number</label>
-                    <input
-                        {...register('whatsappNumber')}
-                        type="tel"
-                        className="w-full bg-ai-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-ai-blue/50 transition-colors placeholder:text-zinc-700"
-                        placeholder="+1 234 567 8900"
-                    />
-                    {errors.whatsappNumber && <p className="text-red-400 text-xs">{errors.whatsappNumber.message}</p>}
+                <div>
+                    <div className="relative">
+                        <input id="f-wa" {...register('whatsappNumber')} type="tel" placeholder="WhatsApp number" autoComplete="tel" className={field} />
+                        <label htmlFor="f-wa" className={label}>WhatsApp number (with country code)</label>
+                    </div>
+                    {errors.whatsappNumber && <p className="mt-1 text-xs text-red-400">{errors.whatsappNumber.message}</p>}
                 </div>
 
                 {error && (
-                    <div className="flex items-center gap-2 text-red-400 text-xs bg-red-500/10 p-3 rounded-lg border border-red-500/20">
+                    <div className="flex items-center gap-2 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-xs text-red-400">
                         <AlertCircle size={14} />
                         <span>{error}</span>
                     </div>
@@ -210,22 +190,20 @@ export default function WhatsAppForm() {
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-6 bg-ai-blue hover:bg-ai-blue-dim text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed group shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
+                    className="group relative mt-2 flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-brand py-4 font-medium text-white transition-all hover:shadow-[0_0_40px_-6px_rgba(77,142,255,0.7)] disabled:cursor-not-allowed disabled:opacity-70"
                 >
+                    <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                     {isSubmitting ? (
                         <Loader2 className="animate-spin" size={20} />
                     ) : (
                         <>
-                            <span>BOOK NOW</span>
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            Book my call
+                            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                         </>
                     )}
                 </button>
 
-                <p className="text-[10px] text-zinc-600 text-center leading-relaxed">
-                    By submitting, you agree to be contacted via WhatsApp. <br />
-                    We build systems, not spam.
-                </p>
+                <p className="pt-1 text-center text-xs text-muted/80">We&apos;ll reply on WhatsApp. No spam, ever.</p>
             </form>
         </div>
     );

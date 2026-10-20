@@ -1,34 +1,33 @@
-import Hero from '@/components/Hero';
-import ValueProposition from '@/components/ValueProposition';
-import Story from '@/components/Story'; // Represents "Overview"
-import Differentiator from '@/components/Differentiator';
-import BrandStatement from '@/components/BrandStatement';
-import Footer from '@/components/Footer';
-import Clients from '@/components/Clients';
+import Hero from '@/components/home/Hero';
+import Statement from '@/components/home/Statement';
+import ServicesBento from '@/components/home/ServicesBento';
+import Process from '@/components/home/Process';
+import Work from '@/components/home/Work';
 import Pricing from '@/components/Pricing';
+import FAQ from '@/components/home/FAQ';
+import { faqs } from '@/lib/content';
+
+const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+};
 
 export default function Home() {
-  return (
-    <div className="flex flex-col min-h-screen bg-ai-black text-foreground overflow-x-hidden w-full max-w-[100vw]">
-      <Hero />
-
-      <ValueProposition />
-
-      <div id="about" className="relative z-10 bg-ai-black">
-        <Story />
-      </div>
-
-      <div id="system" className="scroll-mt-28">
-        <Differentiator />
-      </div>
-
-      <Pricing />
-
-      {/* <Clients /> */}
-
-      <div id="contact">
-        <Footer />
-      </div>
-    </div>
-  );
+    return (
+        <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+            <Hero />
+            <Statement />
+            <ServicesBento />
+            <Process />
+            <Work />
+            <Pricing />
+            <FAQ />
+        </>
+    );
 }

@@ -1,69 +1,72 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowUpRight, Clock } from 'lucide-react';
-import { CaseStudy } from '@/lib/case-studies';
+import { useRef, type MouseEvent } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import type { CaseStudy } from '@/lib/case-studies';
 
+/** Case study card with 3D tilt and an accent-coloured glow. */
 export default function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
+    const ref = useRef<HTMLAnchorElement>(null);
+    const mx = useMotionValue(0.5);
+    const my = useMotionValue(0.5);
+    const rx = useSpring(useTransform(my, [0, 1], [6, -6]), { stiffness: 200, damping: 20 });
+    const ry = useSpring(useTransform(mx, [0, 1], [-6, 6]), { stiffness: 200, damping: 20 });
+
+    const onMove = (e: MouseEvent) => {
+        const r = ref.current?.getBoundingClientRect();
+        if (!r) return;
+        mx.set((e.clientX - r.left) / r.width);
+        my.set((e.clientY - r.top) / r.height);
+    };
+    const reset = () => {
+        mx.set(0.5);
+        my.set(0.5);
+    };
+
+    const lead = study.results[0];
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ perspective: 1000 }}
+            className="h-full"
         >
-            <Link href={`/case-studies/${study.slug}`} className="block group h-full">
-                <div className="h-full bg-ai-card border border-white/5 rounded-2xl overflow-hidden hover:border-white/15 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,0,0,0.4)] hover:-translate-y-1">
-                    {/* Gradient Cover */}
-                    <div className={`relative h-40 bg-gradient-to-br ${study.coverGradient} bg-ai-black flex items-end p-6`}>
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:30px_30px]" />
-                        <div className="relative z-10 inline-flex items-center gap-2">
-                            <span
-                                className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-full border"
-                                style={{ color: study.accentColor, borderColor: `${study.accentColor}40`, backgroundColor: `${study.accentColor}10` }}
-                            >
-                                {study.serviceLabel}
-                            </span>
-                            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 flex items-center gap-1">
-                                <Clock size={10} /> {study.duration}
-                            </span>
-                        </div>
-                        {/* Arrow icon */}
-                        <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 group-hover:border-white/20 transition-all">
-                            <ArrowUpRight size={14} className="text-zinc-400 group-hover:text-white transition-colors" />
-                        </div>
+            <motion.div style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d' }} className="h-full">
+                <Link
+                    ref={ref}
+                    href={`/case-studies/${study.slug}`}
+                    onMouseMove={onMove}
+                    onMouseLeave={reset}
+                    className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface p-6 transition-colors hover:border-white/15 md:p-7"
+                >
+                    <div
+                        className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30 blur-3xl transition-opacity duration-500 group-hover:opacity-60"
+                        style={{ background: study.accentColor }}
+                    />
+                    <div className="relative mb-10 flex items-center justify-between">
+                        <span className="rounded-full border border-line bg-white/[0.03] px-3 py-1 text-xs text-muted">{study.industry}</span>
+                        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-muted transition-all duration-300 group-hover:rotate-45 group-hover:border-paper group-hover:bg-paper group-hover:text-ink">
+                            <ArrowUpRight size={16} />
+                        </span>
                     </div>
 
-                    {/* Content */}
-                    <div className="p-6 flex flex-col gap-4">
-                        <div>
-                            <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-2">{study.industry}</p>
-                            <h3 className="text-white font-bold text-lg leading-snug group-hover:text-ai-blue transition-colors">{study.title}</h3>
-                            <p className="text-zinc-500 text-sm mt-2 leading-relaxed">{study.tagline}</p>
-                        </div>
-
-                        {/* Key Metrics Preview */}
-                        <div className="grid grid-cols-2 gap-3 pt-2 border-t border-white/5">
-                            {study.results.slice(0, 2).map((result, i) => (
-                                <div key={i}>
-                                    <div className="text-white font-bold text-xl" style={{ color: study.accentColor }}>{result.metric}</div>
-                                    <div className="text-zinc-500 text-xs leading-tight">{result.value}</div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2 pt-1">
-                            {study.tags.slice(0, 3).map((tag) => (
-                                <span key={tag} className="text-[10px] font-mono text-zinc-600 bg-white/3 border border-white/5 px-2 py-0.5 rounded-full">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
+                    <div className="relative mt-auto" style={{ transform: 'translateZ(30px)' }}>
+                        <p className="text-6xl font-medium tracking-[-0.05em] md:text-7xl" style={{ color: study.accentColor }}>
+                            {lead.metric}
+                        </p>
+                        <p className="mb-6 text-sm text-muted">{lead.value}</p>
+                        <h3 className="text-lg font-medium leading-snug tracking-tight text-paper md:text-xl">{study.title}</h3>
+                        <p className="mt-3 text-sm text-muted">
+                            {study.serviceLabel} · {study.duration}
+                        </p>
                     </div>
-                </div>
-            </Link>
+                </Link>
+            </motion.div>
         </motion.div>
     );
 }

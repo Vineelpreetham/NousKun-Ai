@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, animate, motion, useMotionValue, useTransform } from 'framer-motion';
 import { markLoaded } from '@/lib/loader';
+import Logo from './Logo';
 
 const ease = [0.76, 0, 0.24, 1] as const;
 const SEEN_KEY = 'nk-intro-seen';
@@ -109,16 +110,14 @@ export default function Preloader() {
                             ))}
                         </svg>
 
-                        <div className="mt-6 overflow-hidden">
-                            <motion.p
-                                initial={{ y: '110%' }}
-                                animate={{ y: '0%' }}
-                                transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
-                                className="text-2xl font-semibold tracking-tight text-paper md:text-3xl"
-                            >
-                                NousKun<span className="text-brand"> AI</span>
-                            </motion.p>
-                        </div>
+                        <motion.div
+                            className="mt-8"
+                            initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0.4 }}
+                            animate={{ clipPath: 'inset(0 0% 0 0)', opacity: 1 }}
+                            transition={{ duration: 0.9, delay: 1.05, ease: [0.65, 0, 0.35, 1] }}
+                        >
+                            <Logo height={30} priority className="md:h-[38px] md:w-auto" />
+                        </motion.div>
                     </motion.div>
 
                     <div className="absolute inset-x-5 bottom-6 flex items-end justify-between md:inset-x-10 md:bottom-10">

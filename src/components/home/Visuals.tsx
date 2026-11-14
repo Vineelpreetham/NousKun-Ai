@@ -103,7 +103,7 @@ export function FlowVisual() {
                         animate={{ stroke: ['rgba(77,142,255,0.35)', 'rgba(156,192,255,1)', 'rgba(77,142,255,0.35)'] }}
                         transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.5 }}
                     />
-                    <text x={n.x} y={n.y + 3.5} textAnchor="middle" fontSize="9" fill="#f3f1ec" fontFamily="var(--font-geist)">
+                    <text x={n.x} y={n.y + 3.5} textAnchor="middle" fontSize="9" fill="#f3f1ec" fontFamily="var(--font-bricolage)">
                         {n.label}
                     </text>
                 </g>
@@ -115,34 +115,44 @@ export function FlowVisual() {
 /* ---------- Browser: a page assembling itself ---------- */
 
 export function BrowserVisual() {
-    const blocks = [
-        'col-span-6 h-3 w-2/3',
-        'col-span-6 h-3 w-1/2',
-        'col-span-3 h-14',
-        'col-span-3 h-14',
-        'col-span-2 h-8',
-        'col-span-2 h-8',
-        'col-span-2 h-8',
-    ];
+    const pop = (i: number) => ({
+        initial: { opacity: 0, y: 10 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: false, margin: '-40px' },
+        transition: { delay: 0.1 + i * 0.1, duration: 0.5 },
+    });
     return (
-        <div className="h-full overflow-hidden rounded-xl border border-line bg-ink/80">
+        <div className="flex h-full flex-col overflow-hidden rounded-xl border border-line bg-ink/80">
             <div className="flex items-center gap-1.5 border-b border-line px-3 py-2">
                 {['bg-red-400/70', 'bg-yellow-400/70', 'bg-green-400/70'].map((c) => (
                     <span key={c} className={`h-2 w-2 rounded-full ${c}`} />
                 ))}
                 <span className="ml-3 h-4 flex-1 rounded-md bg-white/[0.05] px-2 text-[9px] leading-4 text-muted">yourbrand.com</span>
             </div>
-            <div className="grid grid-cols-6 gap-2 p-3">
-                {blocks.map((b, i) => (
-                    <motion.div
-                        key={i}
-                        className={`rounded-md ${i === 2 ? 'bg-brand/40' : 'bg-white/[0.07]'} ${b}`}
-                        initial={{ opacity: 0, y: 8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, margin: '-40px' }}
-                        transition={{ delay: 0.1 + i * 0.12, duration: 0.5 }}
+            <div className="flex flex-1 flex-col gap-2 p-3">
+                <motion.div {...pop(0)} className="flex items-center justify-between">
+                    <span className="h-2.5 w-14 rounded bg-white/20" />
+                    <span className="flex gap-1.5">{[0, 1, 2].map((k) => <span key={k} className="h-2 w-8 rounded bg-white/10" />)}</span>
+                </motion.div>
+                <motion.div {...pop(1)} className="relative flex flex-[2] flex-col justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-br from-brand/50 to-brand-deep/40 p-3">
+                    <span className="h-3 w-2/3 rounded bg-white/70" />
+                    <span className="h-3 w-1/2 rounded bg-white/50" />
+                    <span className="mt-1 h-5 w-20 rounded-full bg-white/90" />
+                    <motion.span
+                        className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/20 blur-xl"
+                        animate={{ x: [0, -20, 0], y: [0, 15, 0] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                     />
-                ))}
+                </motion.div>
+                <div className="grid flex-1 grid-cols-3 gap-2">
+                    {[2, 3, 4].map((k) => (
+                        <motion.div key={k} {...pop(k)} className="flex flex-col gap-1.5 rounded-lg bg-white/[0.06] p-2">
+                            <span className="h-6 w-6 rounded-md bg-brand/40" />
+                            <span className="h-1.5 w-3/4 rounded bg-white/15" />
+                            <span className="h-1.5 w-1/2 rounded bg-white/10" />
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </div>
     );

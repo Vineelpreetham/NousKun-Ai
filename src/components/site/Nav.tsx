@@ -48,7 +48,7 @@ export default function Nav() {
                     )}
                 >
                     <Link href="/" aria-label="NousKun AI home" className="relative z-[110]">
-                        <Logo />
+                        <Logo height={17} priority className="md:h-[19px] md:w-auto" />
                     </Link>
 
                     <ul className="hidden items-center md:flex" onMouseLeave={() => setHovered(null)}>

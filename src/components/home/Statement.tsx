@@ -12,8 +12,8 @@ export default function Statement() {
                 </Reveal>
                 <ScrollText
                     className="text-[clamp(1.75rem,4.2vw,3.5rem)] font-medium leading-[1.12] tracking-[-0.03em] text-paper"
-                    highlight={['system', 'automatically']}
-                    text="Most businesses don't need another tool. They need one system that captures every lead, answers every customer and follows up automatically — while the team focuses on work only humans can do."
+                    highlight={['live', 'real']}
+                    text="Most AI projects stall after the demo. Ours go live — agents, products and websites that do real work for real customers, and keep doing it long after launch."
                 />
             </div>
         </section>

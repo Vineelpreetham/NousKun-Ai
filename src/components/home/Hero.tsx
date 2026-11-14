@@ -12,7 +12,7 @@ import HeroMark from './HeroMark';
 import { toolStack } from '@/lib/content';
 import { useLoaded } from '@/lib/loader';
 
-const rotating = ['capture every lead.', 'reply in seconds.', 'book your meetings.', 'never clock out.'];
+const rotating = ['go live in weeks.', 'reply in seconds.', 'run 24/7.', 'never clock out.'];
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const headline = ['AI', 'systems', 'that'];
@@ -47,9 +47,10 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 60 }}
                 animate={ready ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 1.6, ease, delay: 0.4 }}
-                className="pointer-events-none absolute inset-x-0 bottom-16 select-none text-center text-[22vw] font-semibold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1px_rgba(156,192,255,0.09)]"
+                className="pointer-events-none absolute inset-x-0 bottom-20 select-none px-6"
             >
-                nouskun
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/brand/nouskun-wordmark.svg" alt="" className="mx-auto h-auto w-full max-w-[1500px] opacity-[0.05]" draggable={false} />
             </motion.div>
 
             <div className="relative z-10 mx-auto grid w-full max-w-6xl flex-1 items-center gap-6 px-5 pb-10 pt-24 md:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-4 lg:pt-24">
@@ -82,7 +83,7 @@ export default function Hero() {
                                 </span>
                             ))}
                         </motion.span>
-                        <span className="sr-only"> capture every lead, reply in seconds, book your meetings and never clock out.</span>
+                        <span className="sr-only"> go live in weeks, reply in seconds, run 24/7 and never clock out.</span>
                         <span aria-hidden className="relative mt-1 block h-[1.1em] overflow-hidden">
                             <AnimatePresence mode="popLayout" initial={false}>
                                 {ready && (
@@ -107,8 +108,8 @@ export default function Hero() {
                         transition={{ duration: 0.9, ease, delay: 0.55 }}
                         className="mx-auto mt-7 max-w-lg text-base leading-relaxed text-muted md:text-lg lg:mx-0"
                     >
-                        We build custom AI agents, WhatsApp automations and high-converting websites — wired into one system that
-                        works for your business 24/7.
+                        We design, build and run AI agents, SaaS products and websites for growing businesses. Live in weeks — and
+                        we keep them running after launch.
                     </motion.p>
 
                     <motion.div

@@ -5,6 +5,8 @@ import Process from '@/components/home/Process';
 import Work from '@/components/home/Work';
 import Pricing from '@/components/Pricing';
 import FAQ from '@/components/home/FAQ';
+import Workforce from '@/components/home/Workforce';
+import OurPromise from '@/components/home/OurPromise';
 import { faqs } from '@/lib/content';
 
 const faqJsonLd = {
@@ -24,7 +26,9 @@ export default function Home() {
             <Hero />
             <Statement />
             <ServicesBento />
+            <Workforce />
             <Process />
+            <OurPromise />
             <Work />
             <Pricing />
             <FAQ />

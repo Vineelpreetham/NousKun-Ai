@@ -74,11 +74,9 @@ export default function Footer() {
             </div>
 
             <div ref={wordRef} className="relative mx-auto max-w-[1400px] select-none px-4" aria-hidden>
-                <motion.div
-                    style={{ y, opacity }}
-                    className="bg-gradient-to-b from-paper/90 via-paper/30 to-transparent bg-clip-text text-center text-[21vw] font-semibold leading-[0.8] tracking-[-0.06em] text-transparent"
-                >
-                    nouskun
+                <motion.div style={{ y, opacity }} className="pb-10 pt-6 [mask-image:linear-gradient(to_bottom,black_35%,transparent_105%)]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/brand/nouskun-wordmark.svg" alt="" className="h-auto w-full" draggable={false} />
                 </motion.div>
             </div>
 

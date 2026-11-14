@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google';
+import { Bricolage_Grotesque, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/site/Nav';
 import Footer from '@/components/site/Footer';
@@ -9,15 +9,13 @@ import AiStrategistWidget from '@/components/AiStrategistWidget';
 import MotionProvider from '@/components/motion/MotionProvider';
 import { site } from '@/lib/site';
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' });
-const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' });
-const instrument = Instrument_Serif({
+const bricolage = Bricolage_Grotesque({
     subsets: ['latin'],
-    weight: '400',
-    style: ['normal', 'italic'],
-    variable: '--font-instrument',
+    variable: '--font-bricolage',
     display: 'swap',
+    axes: ['opsz', 'wdth'],
 });
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' });
 
 export const metadata: Metadata = {
     metadataBase: new URL(site.url),
@@ -69,7 +67,7 @@ const orgJsonLd = {
             alternateName: ['NousKūn AI', 'Nouskun', 'Nouskun AI', site.legalName],
             legalName: site.legalName,
             url: site.url,
-            logo: `${site.url}/icon.svg`,
+            logo: `${site.url}/brand/nouskun-icon-512.png`,
             email: site.email,
             description: site.description,
         },
@@ -107,7 +105,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html
             lang="en"
-            className={`dark ${geist.variable} ${geistMono.variable} ${instrument.variable}`}
+            className={`dark ${bricolage.variable} ${geistMono.variable}`}
             suppressHydrationWarning
         >
             <head>

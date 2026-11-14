@@ -5,7 +5,7 @@ export const site = {
     title: 'NousKun AI — AI Automation Company for AI Agents, Chatbots & Smart Websites',
     shortTitle: 'NousKun AI',
     description:
-        'NousKun AI is an AI automation company. We build custom AI agents, WhatsApp automation, AI chatbots, conversion-focused websites and AI-powered SaaS that capture leads and run your operations 24/7.',
+        'NousKun AI is an AI company that designs, builds and runs AI agents, RAG assistants, WhatsApp automation, SaaS products, websites and apps — live in weeks and kept running after launch.',
     keywords: [
         'NousKun AI',
         'Nouskun',

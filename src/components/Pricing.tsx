@@ -136,9 +136,9 @@ const plans: Record<'ai' | 'web' | 'saas', Plan[]> = {
 };
 
 const tabs = [
-    { id: 'ai', label: 'AI & Automation' },
-    { id: 'web', label: 'Websites' },
-    { id: 'saas', label: 'AI SaaS' },
+    { id: 'ai', label: 'AI agents' },
+    { id: 'saas', label: 'SaaS products' },
+    { id: 'web', label: 'Web & apps' },
 ] as const;
 
 export default function Pricing() {

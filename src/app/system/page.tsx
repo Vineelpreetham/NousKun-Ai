@@ -3,9 +3,9 @@ import PageHeader from '@/components/site/PageHeader';
 import Process from '@/components/home/Process';
 
 export const metadata: Metadata = {
-    title: 'Our Process — How We Build AI Automation Systems',
+    title: 'How We Work — Scope, Build, Run',
     description:
-        'How NousKun AI plans, builds, connects and improves AI automation systems: blueprint, build, connect and evolve.',
+        'How NousKun AI works: a free scoping call and fixed proposal, weekly working demos, then launch in weeks with monitoring and ongoing support.',
     alternates: { canonical: '/system' },
 };
 
@@ -14,9 +14,9 @@ export default function SystemPage() {
         <>
             <PageHeader
                 eyebrow="Process"
-                title="How we build"
-                accent="systems that last."
-                intro="From the first call to continuous improvement — four phases that turn scattered tools and manual work into one system that runs itself."
+                title="Scope. Build."
+                accent="Run."
+                intro="Three steps from first call to production. Clear pricing up front, working demos every week, and a team that keeps your system running after launch."
             />
             <Process heading={false} />
         </>

@@ -1,10 +1,15 @@
 import { ImageResponse } from 'next/og';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 export const alt = 'NousKun AI — AI agents, automation and websites that work 24/7';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-export default function OGImage() {
+export default async function OGImage() {
+    const wordmark = await readFile(join(process.cwd(), 'public/brand/nouskun-wordmark-3000.png'));
+    const wordmarkSrc = `data:image/png;base64,${wordmark.toString('base64')}`;
+
     return new ImageResponse(
         (
             <div
@@ -20,18 +25,8 @@ export default function OGImage() {
                     fontFamily: 'sans-serif',
                 }}
             >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    <svg width="56" height="56" viewBox="0 0 100 100">
-                        <g stroke="#4D8EFF" strokeWidth="16" strokeLinecap="round" fill="none">
-                            <path d="M30 25 L30 75" />
-                            <path d="M30 25 L70 75" />
-                            <path d="M70 25 L70 75" />
-                        </g>
-                    </svg>
-                    <span style={{ fontSize: 36, fontWeight: 600 }}>
-                        NousKun<span style={{ color: '#4D8EFF' }}>&nbsp;AI</span>
-                    </span>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+                <img src={wordmarkSrc} width={430} height={60} />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <div style={{ fontSize: 76, fontWeight: 600, letterSpacing: -3, lineHeight: 1.02 }}>AI systems that</div>
                     <div style={{ fontSize: 76, fontWeight: 600, letterSpacing: -3, lineHeight: 1.02, color: '#9cc0ff' }}>

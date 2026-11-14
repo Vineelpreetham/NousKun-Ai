@@ -1,24 +1,33 @@
+/* eslint-disable @next/next/no-img-element -- SVG wordmark; next/image adds nothing for vector files */
+
+// Wordmark artwork is 5728 × 800 (≈ 7.16 : 1)
+export const WORDMARK_RATIO = 5728 / 800;
+
 export function LogoMark({ className = 'h-7 w-7' }: { className?: string }) {
-    return (
-        <svg viewBox="0 0 100 100" className={className} aria-hidden>
-            <g stroke="#4D8EFF" strokeWidth="16" strokeLinecap="round" strokeLinejoin="round" fill="none">
-                <path d="M30 25 L30 75" />
-                <path d="M30 25 L70 75" />
-                <path d="M70 25 L70 75" />
-            </g>
-            <circle cx="30" cy="25" r="4.5" fill="#08090b" />
-            <circle cx="70" cy="75" r="4.5" fill="#08090b" />
-        </svg>
-    );
+    return <img src="/brand/nouskun-icon.svg" alt="" aria-hidden className={className} />;
 }
 
-export default function Logo({ className = '' }: { className?: string }) {
+/** The NOUSKŪN AI wordmark. Set the height; width follows the artwork's ratio. */
+export default function Logo({
+    height = 18,
+    className = '',
+    variant = 'light',
+    priority = false,
+}: {
+    height?: number;
+    className?: string;
+    variant?: 'light' | 'dark';
+    priority?: boolean;
+}) {
     return (
-        <span className={`inline-flex items-center gap-2 text-[17px] font-semibold tracking-tight text-paper ${className}`}>
-            <LogoMark />
-            <span>
-                NousKun<span className="text-brand"> AI</span>
-            </span>
-        </span>
+        <img
+            src={variant === 'light' ? '/brand/nouskun-wordmark.svg' : '/brand/nouskun-wordmark-dark.svg'}
+            alt="NousKun AI"
+            width={Math.round(height * WORDMARK_RATIO)}
+            height={height}
+            fetchPriority={priority ? 'high' : undefined}
+            className={`block select-none ${className}`}
+            draggable={false}
+        />
     );
 }

@@ -19,11 +19,11 @@ export default function Process({ heading = true }: { heading?: boolean }) {
                             <span className="h-px w-8 bg-brand" /> How we work
                         </p>
                         <h2 className="text-[clamp(2.25rem,5vw,4rem)] font-medium leading-[1] tracking-[-0.04em] text-paper">
-                            <WordsReveal text="From messy to" />{' '}
-                            <WordsReveal text="machine-smooth." className="serif text-brand-soft" delay={0.2} />
+                            <WordsReveal text="Scope. Build." />{' '}
+                            <WordsReveal text="Run." className="serif text-brand-soft" delay={0.2} />
                         </h2>
                         <p className="mt-6 max-w-sm text-muted">
-                            Four steps, one connected system. You see progress every week, and nothing ships that doesn&apos;t move a number.
+                            From first call to production in weeks. You see working software every week, and you always know what it costs.
                         </p>
                     </div>
                 )}
